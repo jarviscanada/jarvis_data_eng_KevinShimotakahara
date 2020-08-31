@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #check to see if docker is running; if not, start it
-systemctl sudo status docker || sudo systemctl start docker
+sudo systemctl status docker || sudo systemctl start docker
 action=$1
 #depending on input, run either "create", "start", or "stop" commands
 case $action in
