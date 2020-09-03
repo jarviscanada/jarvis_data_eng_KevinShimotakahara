@@ -1,4 +1,5 @@
-#1.0 Introduction
+#Linux Clustering Montitoring Agent
+##1.0 Introduction
 This project automates the monitoring of a Linux server 
 cluster's activity. Machine usage data and hardware information gets stored 
 in a PostgreSQL database, which is automatically populated 
@@ -19,9 +20,9 @@ with a persistent Docker volume
 that stores the data managed by the PostgreSQL
 instance running in the container. 
 
-#2.0 Quick Start
+##2.0 Quick Start
 ###2.1 Install Docker
-Before our bash scripts can be used, we must install
+Before the bash scripts can be used, one must install
 Docker and pull a PostgreSQL image:
 ```bash
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
@@ -35,9 +36,9 @@ sudo yum -y install docker-ce docker-ce-cli containerd.io
 sudo groupadd docker
 sudo usermod -aG docker your_username_here_to_avoid_sudo
 ```
-Note that the commands that install Docker assumes a CentOS v7
+The commands used to install Docker assume that a CentOS v7
 Linux distribution is being used, and may differ depending
-on the distribution being used.
+on the distribution used to implement the project.
 ### 2.2 Start Docker and Pull PostgreSQL
 ```bash
 systemctl status docker || systemctl start docker
@@ -53,7 +54,7 @@ in the above command. This will depend on your personal
 directory structure and where you currently are in your
 terminal. This advice applies to all bash commands.
 ### 2.4 Create Database and Tables
-First, connect to your PostgreSQL instance:
+First, connect to the PostgreSQL instance:
 ```bash
 psql -h localhost -U postgres -W
 ```
@@ -65,7 +66,7 @@ with a CREATE DATABASE command, then exit the REPL:
 CREATE DATABASE host_agent;
 \q
 ```
-Now, we run `ddl.sql` to automatically set up our tables:
+Now, run `ddl.sql` to automatically set up our tables:
 ```bash
 psql -h localhost -U postgres -d host_agent -f ddl.sql
 ```
@@ -90,7 +91,7 @@ instance is running on
 the default port is 5432
 * `db_name`: host_agent
 * `psql_user`: postgres
-* `psql_password`: the password you want to use to log in
+* `psql_password`: the desired login password
 to the PostgreSQL instance
 
 `host_usage ` records useful state information of the
@@ -113,10 +114,16 @@ then hit `ENTER`. The input arguments for
 `host_usage.sh` are the same as what you use for 
 `host_info.sh`.
 
-#3.0 Architecture Diagram
-Draw a cluster diagram with three Linux hosts, a DB, and agents (use draw.io website). Image must be saved to `assets` directory.
-![my image](./assets/linux_SQL_arch3.jpg)
-#4.0 Database Modeling
+##3.0 Architecture Diagram
+The figure below depicts the data flow from the Linux
+cluster to the node hosting the database. Monitor agents
+exist on each Linux host node, and automatically
+fetch their usage data and forward it to the database.
+Moreover .sql scripts can fetch data from the database,
+so the data can be used by the Linux Cluster Administration
+team.
+![my image](./assets/ArchDiagram.png)
+##4.0 Database Modeling
 In this section we describe the schema of the two tables
 present in our database. 
 - `host_info`
@@ -172,8 +179,8 @@ Quick Start section.
     `create` generates a Docker container running a
     PostgreSQL instance, and it accepts a custom username
     and password information as inputs. `start` and `stop`
-    simply turn the container on and off.
-* host_info.sh
+    turn the container on and off.
+* `host_info.sh`
     * This script scrapes data from a Linux system's
     `lscpu` and `/proc/meminfo` contents, and performs
     an SQL INSERT statement to the remote PostgreSQL
@@ -181,7 +188,7 @@ Quick Start section.
     specifications to the `host_info` table. A detailed
     description of how to call this script has been
     provided in Section 2.5.
-* host_usage.sh
+* `host_usage.sh`
     * This script is similar in design to host_info.sh,
     but is used for adding records to `host_usage`. This
     script makes use of `/proc/meminfo`, `vmstat`, and
@@ -189,20 +196,50 @@ Quick Start section.
     collect useful resource usage data and INSERT it into
     the remote PostgresSQL instance.
     
-* crontab
-    * The chron daemon is used by the Linux system to
-    automate the execution of scripts. `crontab` is a
+* `crontab`
+    * In a Linux system, the chron daemon 
+    automates the execution of scripts. `crontab` is a
     Linux command that allows one to use chron for their
     scripts. This project uses it to run host_usage.sh
     every minute; see how this is done in Section 2.5.
-- queries.sql (describe what business problem you are trying to resolve)
+* `queries.sql`
+    * This script contains three useful SQL queries that
+    can be used to answer important business questions
+    asked by the Linux Cluster Administrators.
+    * The first query reports the total memory available
+    for each Linux host, sorted in descending order. This
+    can help the administrators understand how the cluster's
+    memory assets are distributed among Linux hosts.
+    * The second query reports 5-minute averages of memory
+    usage in percentage form, i.e. the percentage of total
+    memory used on average. If memory usage is frequently
+    high, it may indicate that the Linux Cluster Administrators
+    need to upgrade some hardware.
+    * The third query reports the number of usage data
+    records submitted by the monitoring agents of each
+    Linux host in a 5-minute timeframe. Because the
+    monitoring agents are supposed to send usage data
+    to the database every minute, observing fewer than
+    3 records in a 5-minute window can be interpreted
+    as a Linux host failure. As such, this query is
+    useful for detecting problems in the information
+    system.  
 
 ##6.0 Improvements 
-Write at least three things you want to improve 
-e.g. 
-- handle hardware update 
-- blah
-- blah
+1. Currently, `host_info.sh` is manually executed when
+the information system is being set up. However, to
+track changes to the hardware of each Linux
+host, it is required to upgrade the monitoring agent so
+that it can update its host information record in the
+database automatically.
+2. The workflow for installing Docker and pulling the
+PostgreSQL image is not automated. A bash script
+that can do this would be a useful addition to the
+project.
+3. Designing an alert system that runs `queries.sql`
+and processes its data to notify the administrators
+of required hardware upgrades and system outages would
+make this information system more powerful.
 
 
 
