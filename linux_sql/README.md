@@ -1,5 +1,5 @@
-#Linux Clustering Montitoring Agent
-##1.0 Introduction
+# Linux Clustering Montitoring Agent
+## 1.0 Introduction
 This project automates the monitoring of a Linux server 
 cluster's activity. Machine usage data and hardware information gets stored 
 in a PostgreSQL database, which is automatically populated 
@@ -20,8 +20,8 @@ with a persistent Docker volume
 that stores the data managed by the PostgreSQL
 instance running in the container. 
 
-##2.0 Quick Start
-###2.1 Install Docker
+## 2.0 Quick Start
+### 2.1 Install Docker
 Before the bash scripts can be used, one must install
 Docker and pull a PostgreSQL image:
 ```bash
@@ -114,7 +114,7 @@ then hit `ENTER`. The input arguments for
 `host_usage.sh` are the same as what you use for 
 `host_info.sh`.
 
-##3.0 Architecture Diagram
+## 3.0 Architecture Diagram
 The figure below depicts the data flow from the Linux
 cluster to the node hosting the database. Monitor agents
 exist on each Linux host node, and automatically
@@ -123,7 +123,7 @@ Moreover .sql scripts can fetch data from the database,
 so the data can be used by the Linux Cluster Administration
 team.
 ![my image](./assets/ArchDiagram.png)
-##4.0 Database Modeling
+## 4.0 Database Modeling
 In this section we describe the schema of the two tables
 present in our database. 
 - `host_info`
@@ -225,7 +225,7 @@ Quick Start section.
     useful for detecting problems in the information
     system.  
 
-##6.0 Improvements 
+## 6.0 Improvements 
 1. Currently, `host_info.sh` is manually executed when
 the information system is being set up. However, to
 track changes to the hardware of each Linux
