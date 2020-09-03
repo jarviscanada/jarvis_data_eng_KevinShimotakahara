@@ -1,4 +1,4 @@
-# Linux Clustering Montitoring Agent
+# Linux Clustering Monitoring Agent
 ## 1.0 Introduction
 This project automates the monitoring of a Linux server 
 cluster's activity. Machine usage data and hardware information gets stored 
