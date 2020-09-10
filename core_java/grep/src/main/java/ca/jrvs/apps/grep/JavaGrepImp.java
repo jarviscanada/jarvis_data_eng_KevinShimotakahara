@@ -1,7 +1,7 @@
 package ca.jrvs.apps.grep;
 
-//import com.sun.org.slf4j.internal.Logger;
-//import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,10 +12,11 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.log4j.BasicConfigurator;
 
 public class JavaGrepImp implements JavaGrep {
 
-  //final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
+  final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
 
   private String regex;
   private String rootPath;
@@ -135,31 +136,22 @@ public class JavaGrepImp implements JavaGrep {
   }
 
   public static void main(String[] args) throws FileNotFoundException {
-    //if (args.length != 3){
-    //  throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
-    //}
+    if (args.length != 3){
+      throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
+    }
 
     //Use default logger config
-    //BasicConfigurator.configure(); //no idea what this is and it is making the IDE mad
+    BasicConfigurator.configure();
 
     JavaGrepImp javaGrepImp = new JavaGrepImp();
-    //javaGrepImp.setRegex(args[0]);
-    //javaGrepImp.setRootPath(args[1]);
-    //javaGrepImp.setOutFile(args[2]);
-
-    //testing
-    javaGrepImp.setRegex(".*Romeo.*Juliet.*");
-    javaGrepImp.setOutFile("//home//centos//dev//jarvis_data_eng_kevin//core_java//grep//out//grep_2020-09-10_04:22:06.txt");
-    javaGrepImp.setRootPath("//home//centos//dev//jarvis_data_eng_kevin//core_java//grep//data");
-    //List<File> test = javaGrepImp.listFiles(javaGrepImp.getRootPath());
-    //List<String> otherTest = javaGrepImp.readLines(test.get(0));
-    //end testing
+    javaGrepImp.setRegex(args[0]);
+    javaGrepImp.setRootPath(args[1]);
+    javaGrepImp.setOutFile(args[2]);
 
     try {
       javaGrepImp.process();
     } catch (Exception ex) {
-      //javaGrepImp.logger.error(ex.getMessage(), ex);
-      int dasd = 1;
+      javaGrepImp.logger.error(ex.getMessage(), ex);
     }
 
   }
