@@ -1,20 +1,18 @@
 package ca.jrvs.practice;
 
-public class SyntaxSandbox {
-  int bleh = 2;
-  int test = 4;
-  public int getBleh() {
-    return bleh;
-  }
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.regex.Pattern;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-  public void setBleh(int bleh) {
-    this.bleh = bleh;
-  }
+public class SyntaxSandbox {
 
   public static void main(String[] args) {
-      double bleh = Double.parseDouble("tisd");
-      bleh = bleh + 0.31;
 
-      System.out.println(bleh);
   }
 }

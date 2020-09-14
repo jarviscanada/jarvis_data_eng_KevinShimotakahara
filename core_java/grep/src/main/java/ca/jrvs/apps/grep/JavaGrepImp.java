@@ -79,7 +79,6 @@ public class JavaGrepImp implements JavaGrep {
       String data = myReader.nextLine();
       fileLines.add(data);
     }
-
     return fileLines;
   }
 
