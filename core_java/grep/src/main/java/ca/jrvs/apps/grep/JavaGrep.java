@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface JavaGrep {
   /**
@@ -28,7 +29,7 @@ public interface JavaGrep {
    * @return lines
    * @throws IllegalArgumentException if a given inputFile is not a file
    */
-  List<String> readLines(File inputFile) throws IllegalArgumentException, FileNotFoundException;
+  Stream<String> readLines(File inputFile) throws IllegalArgumentException, FileNotFoundException;
 
   /**
    * check if a line contains the regex patter (passed by user)
@@ -45,7 +46,7 @@ public interface JavaGrep {
    * @param lines matched line
    * @throws IOException if write failed
    */
-  void writeToFile(List<String> lines) throws IOException;
+  void writeToFile(String line) throws IOException;
 
   String getRootPath();
 
