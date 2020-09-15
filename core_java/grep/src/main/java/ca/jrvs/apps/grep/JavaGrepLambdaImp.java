@@ -48,7 +48,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp{
   public List<String> readLines(File inputFile) throws IllegalArgumentException, FileNotFoundException {
     List<String> fileLines = new ArrayList<String>();
     try{
-      Files.lines(Path.of(inputFile.getPath())).forEach(fileLines::add);
+      Files.lines(inputFile.toPath()).forEach(fileLines::add);
     }catch (IOException ex){
       ex.printStackTrace();
     }
