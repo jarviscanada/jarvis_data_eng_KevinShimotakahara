@@ -36,16 +36,19 @@ Just as the above command would
 3. **Save** the file in the directory and under the name provided by
 `outFile1
 
-This application operates the same way.
-   Show a simple example
+This application operates the same way. To get started with an
+example, pull the project code, and navigate to the project's
+root directory called "grep" in your terminal. Then, run
+the commands below:
+
 ```shell script
 #make an exampleDirectory in your home directory
-mkdir ~/exampleDirectory
+mkdir exampleDirectory
 #make a file
-touch ~/exampleDirectory/example.txt
+touch exampleDirectory/example.txt
 
-#add some lines, one with the word "hot dog" in it:
-cat <<- EOF > example.txt
+#add some lines, some with the word "hot dog" in it:
+cat << EOF > exampleDirectory/example.txt
 Once upon a time there was a cat.
 This cat had a hankering for cheeseburgers.
 But all the cat could find was a hot dog stand.
@@ -54,11 +57,11 @@ And this is how McDonalds was created.
 EOF
 
 #make a nested directory, put another text file in it
-mkdir ~/exampleDirectory/nestedDirectory
-touch ~/exampleDirectory/nestedDirectory/nestedExample.txt
+mkdir exampleDirectory/nestedDirectory
+touch exampleDirectory/nestedDirectory/nestedExample.txt
 
 #add some text
-cat <<- EOF > nestedExample.txt
+cat << EOF > exampleDirectory/nestedDirectory/nestedExample.txt
 Once upon a time there was a hot dog.
 This hot dog swore to exact vengeance on the cat that destroyed its home.
 It snuck up on the sleeping cat and tried to hit it.
@@ -66,28 +69,47 @@ But the cat woke up and batted it away.
 The hot dog landed in the street and got run over.
 EOF
 
-#Download jar file
-wget -O grep-demo.jar https://github.com/jarviscanada/jarvis_data_eng_demo/raw/feature/grep_demo_jar/core_java/grep/target/grep-1.0-SNAPSHOT.jar
-
-#Run jar with inputs
-java -jar grep-demo.jar "hot dog" "//home//centos//exampleDirectory" "//home//centos//exampleDirectory//outputExample.txt"
-
+#clean and build project
+mvn clean package
+#Run jar with inputs; code should find all lines with "hot dog" in it
+java -cp target/grep-1.0-SNAPSHOT.jar ca.jrvs.apps.grep.JavaGrepImp .*hot.*dog.* ./exampleDirectory ./out/grep33.txt
 #verify 
-cat ~/exampleDirectory/outputExample.txt
+cat exampleDirectory/outputExample.txt
 ```
 
 # Pseudocode
-write `process` method pseudocode.
-
-1: do the stuff.
+Below is the `process` method pseudocode that does
+the primary operations of the application.
+```java
+public void process(){
+  for (each file in target directory){
+    readLines(file) //creates Files.lines() Stream object
+      .filter(line -> containsPattern(line)) //checks if line matches regex
+      .forEach(matchedLine -> writeToFile(matchedLine); //appends matches to output file
+  }
+}
+```
+1: do the stuff. (LaTeX)
 
 # Performance Issue
-(30-60 words)
-discuss the memory issue
+A potential performance issue identified during the
+design process was the risk of overloading the JVM's
+heap memory should the files be excessively large, or should the
+max heap size be set excessively small.
 
-...Memory Issue?
+This issue was fixed by implementing streams to eliminate the need
+for saving an entire file's worth of text in a list object. Instead,
+a Files.lines() stream "lazily" loads one line at a time from the 
+file source into heap memory as they are processed by our algorithm.
+Moreover, we directly write each line we find that matches the
+regex pattern to the output file without the use of an intermediary
+list object.
 
 # Improvement
-List three things you can improve in this project.
+A few things have been identified that can add value to this project:
 
-1. Don't use this project and use grep instead
+1. Add an option to print the matches found automatically
+2. Handle exceptions more rigorously (craft descriptive error
+messages that help the user understand the problem)
+3. Partner with Neuralink so user can execute the program
+telepathically

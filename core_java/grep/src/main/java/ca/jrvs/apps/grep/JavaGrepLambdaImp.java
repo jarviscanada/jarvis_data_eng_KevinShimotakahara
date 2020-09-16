@@ -3,6 +3,7 @@ package ca.jrvs.apps.grep;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
@@ -19,17 +20,20 @@ import java.util.regex.Pattern;
 import org.apache.log4j.BasicConfigurator;
 
 public class JavaGrepLambdaImp extends JavaGrepImp{
-
+  public JavaGrepLambdaImp(String regex, String rootPath, String outFile){
+    super(regex,rootPath,outFile);
+  }
   public static void main(String[] args) throws FileNotFoundException {
     if (args.length != 3){
       throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
     }
     //creating JavaGrepLambdaImp instead of JavaGrepImp
     //JavaGrepLambdaImp inherits all methods except two override methods in JavaGrepImp
-    JavaGrepLambdaImp javaGrepLambdaImp = new JavaGrepLambdaImp();
-    javaGrepLambdaImp.setRegex(args[0]);
-    javaGrepLambdaImp.setRootPath(args[1]);
-    javaGrepLambdaImp.setOutFile(args[2]);
+//      JavaGrepLambdaImp javaGrepLambdaImp = new JavaGrepLambdaImp();
+//      javaGrepLambdaImp.setRegex(args[0]);
+//      javaGrepLambdaImp.setRootPath(args[1]);
+//      javaGrepLambdaImp.setOutFile(args[2]);
+    JavaGrepImp javaGrepLambdaImp = new JavaGrepLambdaImp(args[0],args[1],args[2]);
 
     try {
       //calling parent method,
@@ -45,10 +49,11 @@ public class JavaGrepLambdaImp extends JavaGrepImp{
    * Implement using lambda and stream APIs
    */
   @Override
-  public List<String> readLines(File inputFile) throws IllegalArgumentException, FileNotFoundException {
-    List<String> fileLines = new ArrayList<String>();
+  public Stream<String> readLines(File inputFile) throws IllegalArgumentException, FileNotFoundException {
+    //List<String> fileLines = new ArrayList<String>();
+    Stream<String> fileLines = null;
     try{
-      Files.lines(inputFile.toPath()).forEach(fileLines::add);
+     fileLines = Files.lines(inputFile.toPath());//.forEach(fileLines::add);
     }catch (IOException ex){
       ex.printStackTrace();
     }

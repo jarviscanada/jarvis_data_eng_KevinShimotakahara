@@ -1,5 +1,11 @@
 package ca.jrvs.apps.grep;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
@@ -21,21 +27,37 @@ public class JavaGrepImp implements JavaGrep {
   private String regex;
   private String rootPath;
   private String outFile;
+  private PrintWriter out;
+
+  public JavaGrepImp(String regex, String rootPath, String outFile){
+    this.regex = regex;
+    this.rootPath = rootPath;
+    this.outFile = outFile;
+  }
 
   /**
    * Top level search workflow
    * @throws IOException
    */
   public void process() throws IOException {
-    ArrayList<String> matchedLines = new ArrayList<String>();
-    for (File file : listFiles(rootPath)){
-      for (String line : readLines(file)){
-        if (containsPattern(line)){
-          matchedLines.add(line);
-        }
-      }
+    try {
+      FileWriter fw = new FileWriter(outFile, true);
+      BufferedWriter bw = new BufferedWriter(fw);
+      this.out = new PrintWriter(bw);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    writeToFile(matchedLines);
+
+    for (File file : listFiles(rootPath)){
+      readLines(file).filter(line -> containsPattern(line)).forEach(matchedLine -> {
+        try {
+          writeToFile(matchedLine);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      });
+    }
+    this.out.close();
   }
 
   /**
@@ -51,7 +73,7 @@ public class JavaGrepImp implements JavaGrep {
       for (File file : files){
         // Check if the file is a directory
         if (file.isDirectory()){
-          //recursively call listFiles
+          //recursively call listFiles this is a sanity check
           filesFound.addAll(listFiles(file.getAbsolutePath()));
         }else{
           filesFound.add(file);
@@ -71,13 +93,26 @@ public class JavaGrepImp implements JavaGrep {
    * @throws IllegalArgumentException if a given inputFile is not a file
    * @throws FileNotFoundException
    */
-  public List<String> readLines(File inputFile)
+  public Stream<String> readLines(File inputFile)
       throws IllegalArgumentException, FileNotFoundException {
-    Scanner myReader = new Scanner(inputFile);
-    List<String> fileLines = new ArrayList<String>();
-    while (myReader.hasNextLine()) {
-      String data = myReader.nextLine();
-      fileLines.add(data);
+//    BufferedReader myReader = new BufferedReader(new FileReader(inputFile));
+//    String line;
+//    List<String> fileLines = new ArrayList<String>();
+//    try {
+//      while ((line = myReader.readLine()) != null) {
+//        String data = line;
+//        fileLines.add(data);
+//      }
+//      myReader.close();
+//    } catch(IOException ex){
+//      ex.printStackTrace();
+//    }
+//    return fileLines;
+    Stream<String> fileLines = null;
+    try{
+      fileLines = Files.lines(inputFile.toPath());//.forEach(fileLines::add);
+    }catch (IOException ex){
+      ex.printStackTrace();
     }
     return fileLines;
   }
@@ -98,16 +133,16 @@ public class JavaGrepImp implements JavaGrep {
    *
    * Explore: FileOutputStream, OutputStreamWriter, and BufferedWriter
    *
-   * @param lines matched line
+   * @param line matched line
    * @throws IOException if write failed
    */
-  public void writeToFile(List<String> lines) throws IOException {
-    FileWriter myWriter = new FileWriter(outFile);
-    for(String line : lines){
-      myWriter.write(line);
-      myWriter.write("\n");
-    }
-    myWriter.close();
+  public void writeToFile(String line) throws IOException {
+//    FileWriter myWriter = new FileWriter(outFile);
+//    myWriter.write(line);
+//    myWriter.write("\n");
+//    myWriter.close();
+    this.out.println(line);
+    //this.out.println("\n");
   }
 
   public String getRootPath(){
@@ -142,10 +177,7 @@ public class JavaGrepImp implements JavaGrep {
     //Use default logger config
     BasicConfigurator.configure();
 
-    JavaGrepImp javaGrepImp = new JavaGrepImp();
-    javaGrepImp.setRegex(args[0]);
-    javaGrepImp.setRootPath(args[1]);
-    javaGrepImp.setOutFile(args[2]);
+    JavaGrepImp javaGrepImp = new JavaGrepImp(args[0],args[1],args[2]);
 
     try {
       javaGrepImp.process();
