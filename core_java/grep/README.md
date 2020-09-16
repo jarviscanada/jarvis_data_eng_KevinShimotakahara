@@ -89,7 +89,6 @@ public void process(){
   }
 }
 ```
-1: do the stuff. (LaTeX)
 
 # Performance Issue
 An earlier version of the project had a failure mode of overloading the JVM's
