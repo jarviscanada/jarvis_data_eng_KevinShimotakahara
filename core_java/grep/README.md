@@ -28,15 +28,15 @@ as follows:
 
 `egrep -r {regex} {rootPath} > {outFile}`
 
-Just as the above command would
+Just as the above `egrep` command would
 1. **Inspect** all files inside the
  indicated directory `rootPath` (including sub-directories)
 2. **Print** all lines of each file inspected that match the `regex` 
  pattern provided into a text file
 3. **Save** the file in the directory and under the name provided by
-`outFile1
+`outFile`,
 
-This application operates the same way. To get started with an
+this application operates the same way. To get started with an
 example, pull the project code, and navigate to the project's
 root directory called "grep" in your terminal. Then, run
 the commands below:
@@ -72,7 +72,7 @@ EOF
 #clean and build project
 mvn clean package
 #Run jar with inputs; code should find all lines with "hot dog" in it
-java -cp target/grep-1.0-SNAPSHOT.jar ca.jrvs.apps.grep.JavaGrepImp .*hot.*dog.* ./exampleDirectory ./out/grep33.txt
+java -cp target/grep-1.0-SNAPSHOT.jar ca.jrvs.apps.grep.JavaGrepImp .*hot.*dog.* ./exampleDirectory ./exampleDirectory/outputExample.txt
 #verify 
 cat exampleDirectory/outputExample.txt
 ```
@@ -92,16 +92,15 @@ public void process(){
 1: do the stuff. (LaTeX)
 
 # Performance Issue
-A potential performance issue identified during the
-design process was the risk of overloading the JVM's
+An earlier version of the project had a failure mode of overloading the JVM's
 heap memory should the files be excessively large, or should the
-max heap size be set excessively small.
+max heap size be excessively small.
 
 This issue was fixed by implementing streams to eliminate the need
 for saving an entire file's worth of text in a list object. Instead,
 a Files.lines() stream "lazily" loads one line at a time from the 
 file source into heap memory as they are processed by our algorithm.
-Moreover, we directly write each line we find that matches the
+Moreover, the stream directly writes each line it finds that matches the
 regex pattern to the output file without the use of an intermediary
 list object.
 
