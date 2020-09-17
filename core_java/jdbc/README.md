@@ -5,7 +5,7 @@ and order records. The core concept of this project was to
 develop objects that can streamline the process of building
 Strings that contain SQL statements which can be fed to JDBC
 APIs, whereupon the PostGreSQL driver that implements the
-JDPC interfaces can forward the SQL statements to the
+JDBC interfaces can forward the SQL statements to the
 database application, and receive its response.
 
 Two different Data Access Objects (DAO) were created, one each
