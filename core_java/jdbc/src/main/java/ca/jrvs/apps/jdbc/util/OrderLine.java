@@ -1,4 +1,4 @@
-package com.frankmoley.lil.jdbc.util;
+package ca.jrvs.apps.jdbc.util;
 
 import java.math.BigDecimal;
 import java.util.Date;

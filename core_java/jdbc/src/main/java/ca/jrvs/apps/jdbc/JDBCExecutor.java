@@ -1,7 +1,7 @@
-package com.frankmoley.lil.jdbc;
+package ca.jrvs.apps.jdbc;
 
-import com.frankmoley.lil.jdbc.util.Order;
-import com.frankmoley.lil.jdbc.util.OrderDAO;
+import ca.jrvs.apps.jdbc.util.Order;
+import ca.jrvs.apps.jdbc.util.OrderDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,5 +1,5 @@
-package com.frankmoley.lil.jdbc;
-import com.frankmoley.lil.jdbc.util.DataTransferObject;
+package ca.jrvs.apps.jdbc;
+import ca.jrvs.apps.jdbc.util.DataTransferObject;
 
 public class Customer implements DataTransferObject {
   private long id;
