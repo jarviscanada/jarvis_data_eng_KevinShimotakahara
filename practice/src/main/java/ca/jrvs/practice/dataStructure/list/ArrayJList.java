@@ -2,6 +2,7 @@ package ca.jrvs.practice.dataStructure.list;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 
 
@@ -49,10 +50,16 @@ public class ArrayJList<E> implements JList<E> {
    * Appends the specified element to the end of this list (optional
    * operation).
    *
-   * Double elementData size if elementData is full.
+   * @param e element to be appended to this list
+   * @return <tt>true</tt> (as specified by {@link Collection#add})
+   * @throws NullPointerException if the specified element is null and this
+   *         list does not permit null elements
    */
   @Override
   public boolean add(E e) {
+    if(e == null){
+      throw new NullPointerException("This list implementation does not allow null elements.");
+    }
     int eldLen = elementData.length;
     if(eldLen <= size){
       //need to double elementData size
@@ -102,27 +109,53 @@ public class ArrayJList<E> implements JList<E> {
     return -1;
   }
 
+  /**
+   * Returns <tt>true</tt> if this list contains the specified element.
+   * More formally, returns <tt>true</tt> if and only if this list contains
+   * at least one element <tt>e</tt> such that
+   * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
+   *
+   * @param o element whose presence in this list is to be tested
+   * @return <tt>true</tt> if this list contains the specified element
+   * @throws NullPointerException if the specified element is null and this
+   *         list does not permit null elements
+   */
   @Override
   public boolean contains(Object o) {
+    if(o == null){
+      throw new NullPointerException("Do not pass null arguments to this method");
+    }
     Object[] es = elementData;
-    if (o == null) {
-      for (int i = 0; i < size; i++) {
-        if (es[i] == null) {
-          return true;
-        }
-      }
-    } else {
-      for (int i = 0; i < size; i++) {
-        if (o.equals(es[i])) {
-          return true;
-        }
+    //if (o == null) {
+//      for (int i = 0; i < size; i++) {
+//        if (es[i] == null) {
+//          return true;
+//        }
+//      }
+    //} else {
+    for (int i = 0; i < size; i++) {
+      if (o.equals(es[i])) {
+        return true;
       }
     }
+    //}
     return false;
   }
 
+  /**
+   * Returns the element at the specified position in this list.
+   *
+   * @param index index of the element to return
+   * @return the element at the specified position in this list
+   * @throws IndexOutOfBoundsException if the index is out of range
+   *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
+   */
   @Override
   public E get(int index) {
+    if (index >= size || index < 0){
+      throw new IndexOutOfBoundsException("Index out of bounds: " + index +
+          "; current list size: " + size);
+    }
     return (E)elementData[index];
   }
 
@@ -157,22 +190,5 @@ public class ArrayJList<E> implements JList<E> {
   public void clear() {
     elementData = new Object[DEFAULT_CAPACITY];
     size = 0;
-  }
-
-  public static void main(String[] args) {
-    //just some quick and dirty validation...
-    ArrayJList<String> arrayJList = new ArrayJList(3);
-    arrayJList.add("0");
-    arrayJList.add("1");
-    arrayJList.add("2");
-    arrayJList.add("3");
-    System.out.println(Arrays.toString(arrayJList.toArray()));
-    arrayJList.remove(2);
-    System.out.println(Arrays.toString(arrayJList.toArray()));
-    System.out.println(arrayJList.size()+" "+arrayJList.contains("1")+" "+arrayJList.contains("2"));
-    System.out.println(arrayJList.get(2)+" "+arrayJList.indexOf("3")+" "+arrayJList.indexOf("lol"));
-    arrayJList.clear();
-    System.out.println(Arrays.toString(arrayJList.toArray()));
-    arrayJList.remove(1);
   }
 }
