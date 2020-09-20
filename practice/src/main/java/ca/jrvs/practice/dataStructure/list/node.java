@@ -9,7 +9,7 @@ public class node<E> {
     this.value = value;
   }
 
-  public node(E value, node next, node previous){
+  public node(node previous, E value, node next){
     this.value = value;
     this.next = next;
     this.previous = previous;

@@ -3,6 +3,7 @@ package ca.jrvs.practice.dataStructure.list;
 import java.util.Arrays;
 import java.util.Collection;
 
+
 public class LinkedJList<E> implements JList{
   node<Object> head;
   node<Object> tail;
@@ -179,4 +180,34 @@ public class LinkedJList<E> implements JList{
     this.tail = null;
     this.size = 0;
   }
+
+
+  /**
+   * Links e as first element.
+   */
+  void linkFirst(E e) {
+    final node<Object> f = head;
+    final node<Object> newNode = new node<>(null, e, f);
+    head = newNode;
+    if (f == null)
+      tail = newNode;
+    else
+      f.setPrevious(newNode);
+    size++;
+  }
+
+  /**
+   * Links e as last element.
+   */
+  void linkLast(E e) {
+    final node<Object> l = tail;
+    final node<Object> newNode = new node<>(l, e, null);
+    tail = newNode;
+    if (l == null)
+      head = newNode;
+    else
+      l.setNext(newNode);
+    size++;
+  }
+
 }
