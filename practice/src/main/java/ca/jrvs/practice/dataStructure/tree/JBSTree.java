@@ -57,6 +57,7 @@ public class JBSTree<E> implements JTree<E> {
             current.left = new JBSTree.Node<E>(object,current);
             return object;
           }
+          break;
         case -1:
           //object is greater than object stored in current node
           if(current.right != null){
@@ -67,6 +68,7 @@ public class JBSTree<E> implements JTree<E> {
             current.right = new JBSTree.Node<E>(object,current);
             return object;
           }
+          break;
       }
     }
       return object;
@@ -108,36 +110,58 @@ public class JBSTree<E> implements JTree<E> {
         throw new IllegalArgumentException(object + " doesn't exist in tree.");
       if(result.right == null && result.left == null){
         //easy remove case
-        result = null;
+        if (result.parent == null){
+          root = null;
+        }else{
+            switch(comparator.compare(result.parent.value,result.value)){
+              case 1:
+                result.parent.left = null;
+                break;
+              case -1:
+                result.parent.right = null;
+                break;
+            }
+        }
+
       }else if(result.right == null ^ result.left == null){
         //medium remove case (object has 1 child)
-        if (result.parent == null){
-          //if parent is single child root, then just set result to root to delete root
-          root = result;
-        }
         if (result.right != null){
-          //check if result is left child of parent or right child of parent
-          switch(comparator.compare(result.parent.value,result.value)){
-            case 1:
-              //parent value is greater than result value, meaning result is left child of parent
-              result.parent.left = result.right;
-              result.right.parent = result.parent;
-            case -1:
-              //parent value is less than result value, meaning result is right child of parent
-              result.parent.right = result.right;
-              result.right.parent = result.parent;
+          if (result.parent == null){
+            //if parent is single child root, then just set result to root to delete root
+            root = result.right;
+          }else{
+            //check if result is left child of parent or right child of parent
+            switch(comparator.compare(result.parent.value,result.value)){
+              case 1:
+                //parent value is greater than result value, meaning result is left child of parent
+                result.parent.left = result.right;
+                result.right.parent = result.parent;
+                break;
+              case -1:
+                //parent value is less than result value, meaning result is right child of parent
+                result.parent.right = result.right;
+                result.right.parent = result.parent;
+                break;
+            }
           }
-        }else{
-          //check if result is left child of parent or right child of parent
-          switch(comparator.compare(result.parent.value,result.value)){
-            case 1:
-              //parent value is greater than result value, meaning result is left child of parent
-              result.parent.left = result.left;
-              result.left.parent = result.parent;
-            case -1:
-              //parent value is less than result value, meaning result is right child of parent
-              result.parent.right = result.left;
-              result.left.parent = result.parent;
+        }else{//result.left is null
+          if (result.parent == null) {
+            //if parent is single child root, then just set result to root to delete root
+            root = result.left;
+          }else{
+            //check if result is left child of parent or right child of parent
+            switch(comparator.compare(result.parent.value,result.value)){
+              case 1:
+                //parent value is greater than result value, meaning result is left child of parent
+                result.parent.left = result.left;
+                result.left.parent = result.parent;
+                break;
+              case -1:
+                //parent value is less than result value, meaning result is right child of parent
+                result.parent.right = result.left;
+                result.left.parent = result.parent;
+                break;
+            }
           }
         }
       }else{
@@ -167,9 +191,11 @@ public class JBSTree<E> implements JTree<E> {
             case 1:
               //parent value is greater than result value, meaning result is left child of parent
               result.parent.left = successor;
+              break;
             case -1:
               //parent value is less than result value, meaning result is right child of parent
               result.parent.right = successor;
+              break;
           }
         }
       }

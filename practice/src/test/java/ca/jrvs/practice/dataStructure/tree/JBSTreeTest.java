@@ -15,11 +15,20 @@ public class JBSTreeTest {
       assertEquals(thing2,4);
       assertEquals(thing3,5);
       assertEquals(tree.insert(1),(Integer)1);
+
+      thing3 = tree.insert(16);
+      tree.remove(4);
       Object[] otherthing = tree.preOrder();
-      System.out.println(otherthing[0]);
-      System.out.println(otherthing[1]);
-      System.out.println(otherthing[2]);
-      System.out.println(otherthing[3]);
+      thing3 = tree.insert(4);
+      tree.remove(1);
+      otherthing = tree.preOrder();
+      tree.insert(10);
+      tree.insert(17);
+      tree.insert(8);
+      tree.insert(9);
+      tree.remove(5);
+      otherthing = tree.preOrder();
+      System.out.println(otherthing.toString());
     }
 //  @Test
 //  public void insert() {
