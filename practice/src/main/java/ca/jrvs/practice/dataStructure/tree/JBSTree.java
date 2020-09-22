@@ -254,8 +254,46 @@ public class JBSTree<E> implements JTree<E> {
      */
     @Override
     public E[] inOrder () {
-      return null;
+      JBSTree.Node<E> current = root;
+      ArrayList<E> outputs = new ArrayList<>();
+
+      //check if root is null
+      if (current == null) return (E[]) outputs.toArray();
+
+      //run recursive left center right traversal of trees
+      lcr(current,outputs);
+
+      return (E[]) outputs.toArray();
     }
+
+  public void lcr(JBSTree.Node<E> current, ArrayList<E> outputs){
+    if (current != null){
+      //deal with left branch
+      if (current.left != null){
+        if (current.left.left == null && current.left.right == null){
+          //left node is a leaf node; can add its value to current function call
+          outputs.add(current.left.getValue());
+        }else{
+          //left node is not a leaf node; must call another lcr
+          lcr(current.left,outputs);
+        }
+      }
+
+      //if you are here, you add current value to outputs (deal with center)
+      outputs.add(current.value);
+
+      //deal with right branch
+      if (current.right != null){
+        if (current.right.left == null && current.right.right == null){
+          //right node is a leaf node; can add its value to current function call
+          outputs.add(current.right.getValue());
+        }else{
+          //right node is not a leaf node; must call another lcr
+          lcr(current.right,outputs);
+        }
+      }
+    }
+  }
 
     /**
      * traverse the tree recursively
@@ -264,8 +302,83 @@ public class JBSTree<E> implements JTree<E> {
      */
     @Override
     public E[] postOrder () {
-      return null;
+      JBSTree.Node<E> current = root;
+      ArrayList<E> outputs = new ArrayList<>();
+
+      //check if root is null
+      if (current == null) return (E[]) outputs.toArray();
+
+      //run recursive center left right traversal of trees
+      lrc(current,outputs);
+
+      return (E[]) outputs.toArray();
     }
+
+  public void lrc(JBSTree.Node<E> current, ArrayList<E> outputs){
+    if (current != null){
+      //deal with left branch
+      if (current.left != null){
+        if (current.left.left == null && current.left.right == null){
+          //left node is a leaf node; can add its value to current function call
+          outputs.add(current.left.getValue());
+        }else{
+          //left node is not a leaf node; must call another lrc
+          lrc(current.left,outputs);
+        }
+      }
+
+      //deal with right branch
+      if (current.right != null){
+        if (current.right.left == null && current.right.right == null){
+          //right node is a leaf node; can add its value to current function call
+          outputs.add(current.right.getValue());
+        }else{
+          //right node is not a leaf node; must call another lrc
+          lrc(current.right,outputs);
+        }
+      }
+      //if you are here, you add current value to outputs (deal with center)
+      outputs.add(current.value);
+    }
+  }
+
+  public int lrc(JBSTree.Node<E> current, int incumbent){
+    if (current != null){
+      //deal with left branch
+      if (current.left != null){
+        if (current.left.left == null && current.left.right == null){
+          //left node is a leaf node need to check its depth
+          incumbent = updateIncumbent(current.left,incumbent);
+        }else{
+          //left node is not a leaf node; must call another lrc
+          incumbent = lrc(current.left,incumbent);
+        }
+      }
+
+      //deal with right branch
+      if (current.right != null){
+        if (current.right.left == null && current.right.right == null){
+          //right node is a leaf node; can add its value to current function call
+          incumbent = updateIncumbent(current.right,incumbent);
+        }else{
+          //right node is not a leaf node; must call another lrc
+          incumbent = lrc(current.right,incumbent);
+        }
+      }
+      //if you are here, you add current value to outputs (deal with center)
+      return updateIncumbent(current,incumbent);
+    }
+    throw new NullPointerException("Recursive call of tree traversal shouldn't ever pass nulls");
+  }
+
+  public int updateIncumbent(JBSTree.Node<E> leafNode, int incumbent){
+      int challenger = 0;
+      while(leafNode != null){
+        leafNode = leafNode.parent;
+        challenger++;
+      }
+      return Math.max(challenger,incumbent);
+  }
 
     /**
      * traverse through the tree and find out the tree height
@@ -274,11 +387,18 @@ public class JBSTree<E> implements JTree<E> {
      */
     @Override
     public int findHeight () {
-      return 0;
+      //this implementation does not assume BST is balanced
+      //as such, it returns the length of the longest branch it finds
+      int incumbent = 0;
+      if(root == null)
+        throw new NullPointerException("BST height is 0 because it is empty");
+      //the ideal approach would be to figure out the depth of leaf nodes as you find them
+      //but I am doing a much more inefficient approach to reuse code
+      //
+      return lrc(root,incumbent);
     }
 
     static final class Node<E> {
-
       E value;
       Node<E> left;
       Node<E> right;
