@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "created_at",
@@ -21,11 +23,13 @@ import java.util.List;
 
 public class Tweet {
   @JsonProperty("created_at")
-  private Date created_at;
+  private String created_at;
   @JsonProperty("id")
   private long id;
   @JsonProperty("id_str")
   private String id_str;
+  @JsonProperty("text")
+  private String text;
   @JsonProperty("entities")
   private List<Entities> entities;
   @JsonProperty("coordinates")
@@ -39,12 +43,20 @@ public class Tweet {
   @JsonProperty("retweeted")
   private boolean retweeted = false;
 
+  public String getText() {
+    return text;
+  }
+
+  public void setText(String text) {
+    this.text = text;
+  }
+
   @JsonProperty("created_at")
-  public Date getCreated_at() {
+  public String getCreated_at() {
     return created_at;
   }
   @JsonProperty("created_at")
-  public void setCreated_at(Date created_at) {
+  public void setCreated_at(String created_at) {
     this.created_at = created_at;
   }
   @JsonProperty("id")
