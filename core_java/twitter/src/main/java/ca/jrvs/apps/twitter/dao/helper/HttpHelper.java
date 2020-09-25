@@ -11,12 +11,12 @@ public interface HttpHelper {
    * @param uri
    * @return
    */
-  HttpResponse httpPost(String uri);
+  HttpResponse httpPost(URI uri);
 
   /**
    * Execute a HTTP Get call
    * @param uri
    * @return
    */
-  HttpResponse httpGet(String uri);
+  HttpResponse httpGet(URI uri);
 }

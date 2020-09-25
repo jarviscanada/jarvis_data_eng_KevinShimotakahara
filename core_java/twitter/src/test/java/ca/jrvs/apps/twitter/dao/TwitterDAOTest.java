@@ -22,11 +22,12 @@ public class TwitterDAOTest {
     HttpHelper httpHelper = new TwitterHttpHelper(consumerKey,consumerSecret,accessToken,tokenSecret);
     TwitterDAO tDAO = new TwitterDAO(httpHelper);
     Tweet init = new Tweet();
-    init.setText("is kinda late bruh");
+    init.setText("You have good reason to feel existential dread");
     Coordinates coords = new Coordinates();
-    float[] thisIsVerySyntaxHeavy = {0,0};
+    double[] thisIsVerySyntaxHeavy = {45.3055448,-75.908182};
     coords.setCoordinates(thisIsVerySyntaxHeavy);
     init.setCoordinates(coords);
     Tweet thing = tDAO.create(init);
+    assertEquals("You have good reason to feel existential dread",thing.getText());
   }
 }

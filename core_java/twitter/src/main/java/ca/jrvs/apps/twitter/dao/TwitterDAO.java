@@ -3,14 +3,14 @@ package ca.jrvs.apps.twitter.dao;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.Coordinates;
-import ca.jrvs.apps.twitter.model.Entities;
-import ca.jrvs.apps.twitter.model.Hashtag;
-import ca.jrvs.apps.twitter.model.UserMention;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import ca.jrvs.apps.twitter.util.JsonUtil;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,54 +38,134 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
   /**
    * Create an entity(Tweet) to the underlying storage
    *
-   * @param entity entity that to be created
+   * @param tweet entity that to be created
    * @return created entity
    */
   @Override
-  public Tweet create(Tweet entity) {
-    //So this needs to get the tweet entity info from the http response that results
-    //From the post request bearing the text and coordinates found in the input Tweet DTO
-    PercentEscaper percentEscaper = new PercentEscaper("", false);
-    Coordinates coords = entity.getCoordinates();
-    //Step 1: generate URI from Tweet data
-    String uri = API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper.escape(entity.getText())
-                  + AMPERSAND + "lat" + EQUAL + coords.getCoordinates()[0]
-                  + AMPERSAND + "long" + EQUAL + coords.getCoordinates()[1];
-    //Step 2: send post request with httphelper
+  public Tweet create(Tweet tweet) {
+    //Construct URI
+    URI uri;
+    try{
+      uri = getPostUri(tweet);
+    } catch(URISyntaxException | UnsupportedEncodingException e){
+      throw new IllegalArgumentException("Invalid tweet input", e);
+    }
+
+    //Execute HTTP Request
     HttpResponse response = httpHelper.httpPost(uri);
 
-    //Step 3: convert response object to JSON
-    String responseJSON = null;
-    try {
-      responseJSON = EntityUtils.toString(response.getEntity());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    //Validate response and extract response to Tweet object
+    return parseResponseBody(response,HTTP_OK);
 
-    //Step 4: convert JSON to Tweet object, return tweet
-    Tweet yerTweet = null;
-    try {
-      yerTweet = toObjectFromJson(responseJSON, Tweet.class);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-     return yerTweet;
+//    //So this needs to get the tweet entity info from the http response that results
+//    //From the post request bearing the text and coordinates found in the input Tweet DTO
+//    PercentEscaper percentEscaper = new PercentEscaper("", false);
+//    Coordinates coords = entity.getCoordinates();
+//    //Step 1: generate URI from Tweet data
+//    String uri = API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper.escape(entity.getText())
+//                  + AMPERSAND + "lat" + EQUAL + coords.getCoordinates()[0]
+//                  + AMPERSAND + "long" + EQUAL + coords.getCoordinates()[1];
+//    //Step 2: send post request with httphelper
+//    HttpResponse response = httpHelper.httpPost(uri);
+//
+//    //Step 3: convert response object to JSON
+//    String responseJSON = null;
+//    try {
+//      responseJSON = EntityUtils.toString(response.getEntity());
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
+//
+//    //Step 4: convert JSON to Tweet object, return tweet
+//    Tweet yerTweet = null;
+//    try {
+//      yerTweet = toObjectFromJson(responseJSON, Tweet.class);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
+//     return yerTweet;
   }
 
-  /**
-   * Parse JSON string to an object
-   * @param json JSON str
-   * @param clazz object class
-   * @param <T> Type
-   * @return Object
-   * @throws IOException
-   */
-  public static <T> T toObjectFromJson(String json, Class clazz) throws IOException {
-    ObjectMapper m = new ObjectMapper();
-    m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-    return (T) m.readValue(json,clazz);
+  public URI getDeleteUri(String id_str) throws URISyntaxException, UnsupportedEncodingException{
+    StringBuilder sb = new StringBuilder();
+    sb.append(API_BASE_URI).append(DELETE_PATH).append("/")
+        .append(URLEncoder.encode(id_str, StandardCharsets.UTF_8.name())).append(".json");
+    return new URI(sb.toString());
   }
+
+  public URI getGetUri(String id_str) throws URISyntaxException, UnsupportedEncodingException {
+    StringBuilder sb = new StringBuilder();
+    sb.append(API_BASE_URI).append(SHOW_PATH).append(QUERY_SYM);
+    appendQueryParam(sb,"id", URLEncoder.encode(id_str, StandardCharsets.UTF_8.name()),true);
+    return new URI(sb.toString());
+  }
+
+  public URI getPostUri(Tweet tweet) throws URISyntaxException, UnsupportedEncodingException {
+    String text = tweet.getText();
+    Double longitude = tweet.getCoordinates().getCoordinates()[0];
+    Double latitude = tweet.getCoordinates().getCoordinates()[1];
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(API_BASE_URI).append(POST_PATH).append(QUERY_SYM);
+    appendQueryParam(sb,"status", URLEncoder.encode(text, StandardCharsets.UTF_8.name()),true);
+    appendQueryParam(sb,"long",longitude.toString(),false);
+    appendQueryParam(sb,"lat",latitude.toString(),false);
+
+    return new URI(sb.toString());
+  }
+
+  private void appendQueryParam(StringBuilder sb, String key, String value, boolean firstParam) {
+    if(firstParam){
+      sb.append(key).append(EQUAL).append(value);
+    }else
+      sb.append(AMPERSAND).append(key).append(EQUAL).append(value);
+  }
+
+  public Tweet parseResponseBody(HttpResponse response, Integer expectedStatusCode){
+    Tweet tweet = null;
+
+    //Check response status
+    int status = response.getStatusLine().getStatusCode();
+    if(status != expectedStatusCode){
+      try{
+        System.out.println(EntityUtils.toString(response.getEntity()));
+      }catch (IOException e){
+        System.out.println("Response has no entity");
+      }
+      throw new RuntimeException("Unexpected HTTP status: " + status);
+    }
+
+    if(response.getEntity() == null){
+      throw new RuntimeException("Empty reponse body");
+    }
+
+    //Convert reponse entity to str
+    String jsonStr;
+    try{
+      jsonStr = EntityUtils.toString(response.getEntity());
+    } catch(IOException e){
+      throw new RuntimeException("Failed to convert entity to String", e);
+    }
+
+    //Deserialize JSON string to Tweet object
+    try{
+      tweet = JsonUtil.toObjectFromJson(jsonStr,Tweet.class);
+    } catch(IOException e){
+      throw new RuntimeException("Unable to convert JSON str to Object", e);
+    }
+
+    return tweet;
+  }
+
+  public String getPostUriStr(Tweet tweet) {
+        PercentEscaper percentEscaper = new PercentEscaper("", false);
+        Coordinates coords = tweet.getCoordinates();
+        return  API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper.escape(tweet.getText())
+                  + AMPERSAND + "lat" + EQUAL + coords.getCoordinates()[0]
+                  + AMPERSAND + "long" + EQUAL + coords.getCoordinates()[1];
+  }
+
+
   /**
    * Find an entity(Tweet) by its id
    *
@@ -94,7 +174,18 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    */
   @Override
   public Tweet findById(String s) {
-    return null;
+    URI uri;
+    try{
+      uri = getGetUri(s);
+    } catch(URISyntaxException | UnsupportedEncodingException e){
+      throw new IllegalArgumentException("Invalid tweet input", e);
+    }
+
+    //Execute HTTP Request
+    HttpResponse response = httpHelper.httpGet(uri);
+
+    //Validate response and extract response to Tweet object
+    return parseResponseBody(response,HTTP_OK);
   }
 
   /**
@@ -105,6 +196,17 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    */
   @Override
   public Tweet deleteById(String s) {
-    return null;
+    URI uri;
+    try{
+      uri = getDeleteUri(s);
+    } catch(URISyntaxException | UnsupportedEncodingException e){
+      throw new IllegalArgumentException("Invalid tweet input", e);
+    }
+
+    //Execute HTTP Request
+    HttpResponse response = httpHelper.httpPost(uri);
+
+    //Validate response and extract response to Tweet object
+    return parseResponseBody(response,HTTP_OK);
   }
 }
