@@ -52,7 +52,6 @@ public class Employee {
     empStrMap.put(amy,amyPreviousCompanies);
     List<String> bobPreviousCompanies = Arrays.asList("A&W","Superstore");
     empStrMap.put(bob,bobPreviousCompanies);
-
     System.out.println("Bob hashcode:" + bob.hashCode());
     System.out.println("Bob value:" + empStrMap.get(bob).toString());
   }
