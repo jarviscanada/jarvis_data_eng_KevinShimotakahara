@@ -3,6 +3,7 @@ package ca.jrvs.apps.twitter.dao;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.Coordinates;
+import ca.jrvs.apps.twitter.util.FourOFourNotFoundException;
 import ca.jrvs.apps.twitter.util.JsonUtil;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    * @return created entity
    */
   @Override
-  public Tweet create(Tweet tweet) {
+  public Tweet create(Tweet tweet) throws FourOFourNotFoundException{
     //Construct URI
     URI uri;
     try{
@@ -121,7 +122,8 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
       sb.append(AMPERSAND).append(key).append(EQUAL).append(value);
   }
 
-  public Tweet parseResponseBody(HttpResponse response, Integer expectedStatusCode){
+  public Tweet parseResponseBody(HttpResponse response, Integer expectedStatusCode)
+      throws FourOFourNotFoundException {
     Tweet tweet = null;
 
     //Check response status
@@ -132,7 +134,12 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
       }catch (IOException e){
         System.out.println("Response has no entity");
       }
-      throw new RuntimeException("Unexpected HTTP status: " + status);
+      if(status == 404){
+        throw new FourOFourNotFoundException("HTTP resource was not found (404 response).");
+      }else{
+        throw new RuntimeException("Unexpected HTTP status: " + status);
+      }
+
     }
 
     if(response.getEntity() == null){
@@ -173,7 +180,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    * @return Tweet entity
    */
   @Override
-  public Tweet findById(String s) {
+  public Tweet findById(String s) throws FourOFourNotFoundException {
     URI uri;
     try{
       uri = getGetUri(s);
@@ -195,7 +202,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    * @return deleted entity
    */
   @Override
-  public Tweet deleteById(String s) {
+  public Tweet deleteById(String s) throws FourOFourNotFoundException{
     URI uri;
     try{
       uri = getDeleteUri(s);

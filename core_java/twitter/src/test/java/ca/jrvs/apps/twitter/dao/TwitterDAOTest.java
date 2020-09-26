@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
+import ca.jrvs.apps.twitter.util.FourOFourNotFoundException;
 import org.junit.Test;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.Coordinates;
@@ -27,7 +28,12 @@ public class TwitterDAOTest {
     double[] thisIsVerySyntaxHeavy = {45.3055448,-75.908182};
     coords.setCoordinates(thisIsVerySyntaxHeavy);
     init.setCoordinates(coords);
-    Tweet thing = tDAO.create(init);
+    Tweet thing = null;
+    try {
+      thing = tDAO.create(init);
+    } catch (FourOFourNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals("You have good reason to feel existential dread",thing.getText());
   }
 }

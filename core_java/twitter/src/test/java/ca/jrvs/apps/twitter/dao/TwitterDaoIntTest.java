@@ -44,7 +44,7 @@ public class TwitterDaoIntTest {
     assertEquals((Double) lon,(Double) tweet.getCoordinates().getCoordinates()[1]);
     //use tweet id just created by this test for next tests
     id_str = tweet.getId_str();
-    Tweet tweet2 = dao.findById(id_str);
+    Tweet tweet2 = dao.findById("13093120134314496");
     assertEquals(id_str, tweet2.getId_str());
     Tweet tweet3 = dao.deleteById(id_str);
     assertEquals(id_str, tweet3.getId_str());
