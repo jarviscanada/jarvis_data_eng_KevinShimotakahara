@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.util.FourOFourNotFoundException;
+import ca.jrvs.apps.twitter.util.TweetUtil;
 import org.junit.Test;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.Coordinates;
@@ -22,18 +23,15 @@ public class TwitterDAOTest {
     String tokenSecret = System.getenv("tokenSecret");
     HttpHelper httpHelper = new TwitterHttpHelper(consumerKey,consumerSecret,accessToken,tokenSecret);
     TwitterDAO tDAO = new TwitterDAO(httpHelper);
-    Tweet init = new Tweet();
-    init.setText("You have good reason to feel existential dread");
-    Coordinates coords = new Coordinates();
-    double[] thisIsVerySyntaxHeavy = {45.3055448,-75.908182};
-    coords.setCoordinates(thisIsVerySyntaxHeavy);
-    init.setCoordinates(coords);
+    String text = "The time is " + System.currentTimeMillis();
+    double lat = 45.3055448, lon = -75.908182;
+    Tweet init = TweetUtil.buildTweet(text,lat,lon);
     Tweet thing = null;
     try {
       thing = tDAO.create(init);
     } catch (FourOFourNotFoundException e) {
       e.printStackTrace();
     }
-    assertEquals("You have good reason to feel existential dread",thing.getText());
+    assertEquals(text,thing.getText());
   }
 }

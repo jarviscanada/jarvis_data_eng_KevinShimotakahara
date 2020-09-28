@@ -1,3 +1,3 @@
 FROM openjdk:8-alpine
-COPY target/twitter*.jar /usr/local/app/twitter/lib/grep.jar
-ENTRYPOINT ["java","-jar","/usr/local/app/grep/lib/grep.jar"]
+COPY target/twitter*.jar /usr/local/app/twitter/lib/twitter.jar
+ENTRYPOINT ["java","-jar","/usr/local/app/twitter/lib/twitter.jar"]
