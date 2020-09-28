@@ -134,7 +134,7 @@ public class TwitterDAOUnitTest {
             + "\"type\": \"Point\","
             + "\"coordinates\": [-75.908182, 45.3055448]}"
             + "}";
-    when(mockHelper.httpPost(isNotNull())).thenReturn(null);
+
     TwitterDAO spyDao = Mockito.spy(dao);
     Tweet expectedTweet = JsonUtil.toObjectFromJson(tweetJsonStr, Tweet.class);
     //mock parseResponseBody

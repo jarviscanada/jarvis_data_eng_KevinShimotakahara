@@ -20,10 +20,6 @@ public class TwitterAPITest {
   private static String TOKEN_SECRET = System.getenv("tokenSecret");
 
   public static void main(String[] args) {
-//    String CONSUMER_KEY = "334u62xIEa55EY8tRuVvXAKw1";
-//    String CONSUMER_SECRET = "dsc5QOzvNhoHbFRvb3sUwcD2EJJ2Bi9f4xpuZZIvPol5VKpaFH";
-//    String ACCESS_TOKEN = "1308468864750153731-Ye7fNxY4GC31xnWh8ombUNTj0xbi6i";
-//    String TOKEN_SECRET = "qzIZRGxrYphm1owdsDucky2pMsHpehxEDIrLwdj8QwZtN";
     //setup oauth
     OAuthConsumer consumer = new CommonsHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
     consumer.setTokenWithSecret(ACCESS_TOKEN, TOKEN_SECRET);

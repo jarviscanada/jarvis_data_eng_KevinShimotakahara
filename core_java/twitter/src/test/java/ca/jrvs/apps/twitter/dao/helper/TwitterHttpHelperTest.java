@@ -22,7 +22,7 @@ public class TwitterHttpHelperTest extends TestCase {
     PercentEscaper percentEscaper = new PercentEscaper("", false);
     TwitterDAO dao = new TwitterDAO(httpHelper);
     HttpResponse response = httpHelper
-        .httpPost(new URI("https://api.twitter.com/1.1/statuses/update.json?status=" + status));
+        .httpPost(new URI("https://api.twitter.com/1.1/statuses/update.json?status=" + percentEscaper.escape(status)));
     System.out.println(EntityUtils.toString(response.getEntity()));
   }
 }

@@ -10,11 +10,13 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Service
 public class TwitterService implements Service {
   private CrdDao dao;
 
-  //@Autowired
+  @Autowired
   public TwitterService(CrdDao dao) {this.dao = dao;}
 
   public Field[] tweetFields = Tweet.class.getDeclaredFields();
