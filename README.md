@@ -22,8 +22,14 @@ The database host setup has been automated with shell scripts, and a .sql file h
 **Core Java Apps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/core_java)]:
       
   - Twitter App: This application allows a user to post, read, and delete Tweets from the Linux Command Line Interface. Our Dockerized Java program accepts a Twitter Developer's OAuth 1.0 credentials needed to be serviced by the Twitter REST API, in addition to the information about the post/show/delete Tweet action to be performed as command line inputs. The application then proceeds to contact the Twitter API to fulfill the request, and prints the JSON file(s) containing information about the Tweets that the user just posted/read/deleted.
-This project was a rich learning experience, introducing the following essential programming concepts:
-Unit/Integration testing with Mockito/JUnit Dependency Management with Spring Organizing project build workflow with Maven Modularizing the functionality of the application as per the Model View Controller (MVC) software development design pattern Reading and writing RESTful Http responses and requests Data parsing and marshalling techniques
+ This project was a rich learning experience, introducing the following essential programming concepts:
+
+Unit/Integration testing with Mockito/JUnit 
+ Dependency Management with Spring 
+ Organizing project build workflow with Maven 
+ Modularizing the functionality of the application as per the Model View Controller (MVC) software development design pattern 
+ Reading and writing RESTful Http responses and requests 
+ Data parsing and marshalling techniques
   - JDBC App: This application sets up a connection via the JDBC API to a PostGreSQL database that manages a business' customer and order records. The core concept of this project was to develop objects that can streamline the process of building Strings that contain SQL statements which can be fed to JDBC APIs, whereupon the PostGreSQL driver that implements the JDBC interfaces can forward the SQL statements to the database application, and receive its response.
 Two different Data Access Objects (DAO) were created, one each for interacting with the Customer and Order data tables in the database. These DAOs leveraged JDBC libraries to facilitate simple SQL query, update, and insert statements specified by a Java client. Data Transfer Object classes were also designed for passing information between the DAOs and the business logic code.
   - Grep App: This application recreates partial functionality of the grep command commonly used in the Linux command line. More specifically, given an input regular expression, directory, and output path/filename, it will search through all files found in the directory and all its sub directories for instances of the regular expression, and print the lines of text containing these instances into the indicated file.
