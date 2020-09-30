@@ -1,5 +1,6 @@
 package ca.jrvs.practice.codingChallenge;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
