@@ -50,39 +50,6 @@ public class TwitterHttpHelper implements HttpHelper {
      */
     httpClient = HttpClientBuilder.create().build();
   }
-//  @Override
-//  public HttpResponse httpPost(URI uri) {
-//    HttpPost request = new HttpPost(uri);
-//    //sign the request (add headers)
-//    try {
-//      consumer.sign(request);
-//    } catch (OAuthMessageSignerException e) {
-//      e.printStackTrace();
-//    } catch (OAuthExpectationFailedException e) {
-//      e.printStackTrace();
-//    } catch (OAuthCommunicationException e) {
-//      e.printStackTrace();
-//    }
-//    HttpResponse response = null;
-//    try {
-//      response = httpClient.execute(request);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//    return response;
-//  }
-
-//  @Override
-//  public HttpResponse httpGet(URI uri) {
-//    HttpGet request = new HttpGet(uri);
-//    HttpResponse response = null;
-//    try {
-//      response = httpClient.execute(request);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//    return response;
-//  }
 
   /**
    * Execute a HTTP Post call
@@ -134,15 +101,5 @@ public class TwitterHttpHelper implements HttpHelper {
 
   public static void main(String[] args) throws Exception {
 
-
-//    String CONSUMER_KEY = System.getenv("consumerKey");
-//    String CONSUMER_SECRET = System.getenv("consumerSecret");
-//    String ACCESS_TOKEN = System.getenv("accessToken");
-//    String TOKEN_SECRET = System.getenv("tokenSecret");
-//
-//    TwitterHttpHelper th = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
-//
-//    HttpResponse getTest = th.httpGet(URI.create("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=realDonaldTrump"));
-//    System.out.println(JsonParser.toJson(getTest,true,false));
   }
 }

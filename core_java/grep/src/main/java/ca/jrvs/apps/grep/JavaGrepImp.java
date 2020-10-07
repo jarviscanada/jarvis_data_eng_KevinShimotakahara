@@ -1,8 +1,6 @@
 package ca.jrvs.apps.grep;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.stream.Stream;
@@ -12,9 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,7 +41,7 @@ public class JavaGrepImp implements JavaGrep {
       BufferedWriter bw = new BufferedWriter(fw);
       this.out = new PrintWriter(bw);
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.error("Failed to create FileWriter; check if output file path is valid.",e);
     }
 
     for (File file : listFiles(rootPath)){
@@ -53,7 +49,7 @@ public class JavaGrepImp implements JavaGrep {
         try {
           writeToFile(matchedLine);
         } catch (IOException e) {
-          e.printStackTrace();
+          logger.error("Failed to write to file.",e);
         }
       });
     }
@@ -95,24 +91,11 @@ public class JavaGrepImp implements JavaGrep {
    */
   public Stream<String> readLines(File inputFile)
       throws IllegalArgumentException, FileNotFoundException {
-//    BufferedReader myReader = new BufferedReader(new FileReader(inputFile));
-//    String line;
-//    List<String> fileLines = new ArrayList<String>();
-//    try {
-//      while ((line = myReader.readLine()) != null) {
-//        String data = line;
-//        fileLines.add(data);
-//      }
-//      myReader.close();
-//    } catch(IOException ex){
-//      ex.printStackTrace();
-//    }
-//    return fileLines;
     Stream<String> fileLines = null;
     try{
       fileLines = Files.lines(inputFile.toPath());//.forEach(fileLines::add);
     }catch (IOException ex){
-      ex.printStackTrace();
+      logger.error("Failed to create fileLines stream; might be an issue with input file path.",ex);
     }
     return fileLines;
   }
@@ -137,12 +120,7 @@ public class JavaGrepImp implements JavaGrep {
    * @throws IOException if write failed
    */
   public void writeToFile(String line) throws IOException {
-//    FileWriter myWriter = new FileWriter(outFile);
-//    myWriter.write(line);
-//    myWriter.write("\n");
-//    myWriter.close();
     this.out.println(line);
-    //this.out.println("\n");
   }
 
   public String getRootPath(){

@@ -59,34 +59,6 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
 
     //Validate response and extract response to Tweet object
     return parseResponseBody(response,HTTP_OK);
-
-//    //So this needs to get the tweet entity info from the http response that results
-//    //From the post request bearing the text and coordinates found in the input Tweet DTO
-//    PercentEscaper percentEscaper = new PercentEscaper("", false);
-//    Coordinates coords = entity.getCoordinates();
-//    //Step 1: generate URI from Tweet data
-//    String uri = API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper.escape(entity.getText())
-//                  + AMPERSAND + "lat" + EQUAL + coords.getCoordinates()[0]
-//                  + AMPERSAND + "long" + EQUAL + coords.getCoordinates()[1];
-//    //Step 2: send post request with httphelper
-//    HttpResponse response = httpHelper.httpPost(uri);
-//
-//    //Step 3: convert response object to JSON
-//    String responseJSON = null;
-//    try {
-//      responseJSON = EntityUtils.toString(response.getEntity());
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//
-//    //Step 4: convert JSON to Tweet object, return tweet
-//    Tweet yerTweet = null;
-//    try {
-//      yerTweet = toObjectFromJson(responseJSON, Tweet.class);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//     return yerTweet;
   }
 
   public URI getDeleteUri(String id_str) throws URISyntaxException, UnsupportedEncodingException{
