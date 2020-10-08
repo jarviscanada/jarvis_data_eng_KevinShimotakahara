@@ -105,7 +105,7 @@ public class IexQuote {
    */
   @JsonProperty("open")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer open = 0;
+  private Long open = 0L;
   /**
    * The openTime schema
    * <p>
@@ -115,7 +115,7 @@ public class IexQuote {
    */
   @JsonProperty("openTime")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer openTime = 0;
+  private Long openTime = 0L;
   /**
    * The close schema
    * <p>
@@ -135,7 +135,7 @@ public class IexQuote {
    */
   @JsonProperty("closeTime")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer closeTime = 0;
+  private Long closeTime = 0L;
   /**
    * The high schema
    * <p>
@@ -195,7 +195,7 @@ public class IexQuote {
    */
   @JsonProperty("latestUpdate")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer latestUpdate = 0;
+  private Long latestUpdate = 0L;
   /**
    * The latestVolume schema
    * <p>
@@ -205,7 +205,7 @@ public class IexQuote {
    */
   @JsonProperty("latestVolume")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer latestVolume = 0;
+  private Long latestVolume = 0L;
   /**
    * The volume schema
    * <p>
@@ -215,7 +215,7 @@ public class IexQuote {
    */
   @JsonProperty("volume")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer volume = 0;
+  private Long volume = 0L;
   /**
    * The iexRealtimePrice schema
    * <p>
@@ -235,7 +235,7 @@ public class IexQuote {
    */
   @JsonProperty("iexRealtimeSize")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer iexRealtimeSize = 0;
+  private Long iexRealtimeSize = 0L;
   /**
    * The iexLastUpdated schema
    * <p>
@@ -245,7 +245,7 @@ public class IexQuote {
    */
   @JsonProperty("iexLastUpdated")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer iexLastUpdated = 0;
+  private Long iexLastUpdated = 0L;
   /**
    * The delayedPrice schema
    * <p>
@@ -265,7 +265,7 @@ public class IexQuote {
    */
   @JsonProperty("delayedPriceTime")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer delayedPriceTime = 0;
+  private Long delayedPriceTime = 0L;
   /**
    * The oddLotDelayedPrice schema
    * <p>
@@ -285,7 +285,7 @@ public class IexQuote {
    */
   @JsonProperty("oddLotDelayedPriceTime")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer oddLotDelayedPriceTime = 0;
+  private Long oddLotDelayedPriceTime = 0L;
   /**
    * The extendedPrice schema
    * <p>
@@ -325,7 +325,7 @@ public class IexQuote {
    */
   @JsonProperty("extendedPriceTime")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer extendedPriceTime = 0;
+  private Long extendedPriceTime = 0L;
   /**
    * The previousClose schema
    * <p>
@@ -345,7 +345,7 @@ public class IexQuote {
    */
   @JsonProperty("previousVolume")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer previousVolume = 0;
+  private Long previousVolume = 0L;
   /**
    * The change schema
    * <p>
@@ -385,7 +385,7 @@ public class IexQuote {
    */
   @JsonProperty("iexVolume")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer iexVolume = 0;
+  private Long iexVolume = 0L;
   /**
    * The avgTotalVolume schema
    * <p>
@@ -395,7 +395,7 @@ public class IexQuote {
    */
   @JsonProperty("avgTotalVolume")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer avgTotalVolume = 0;
+  private Long avgTotalVolume = 0L;
   /**
    * The iexBidPrice schema
    * <p>
@@ -415,7 +415,7 @@ public class IexQuote {
    */
   @JsonProperty("iexBidSize")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer iexBidSize = 0;
+  private Long iexBidSize = 0L;
   /**
    * The iexAskPrice schema
    * <p>
@@ -435,7 +435,7 @@ public class IexQuote {
    */
   @JsonProperty("iexAskSize")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer iexAskSize = 0;
+  private Long iexAskSize = 0L;
   /**
    * The marketCap schema
    * <p>
@@ -445,7 +445,7 @@ public class IexQuote {
    */
   @JsonProperty("marketCap")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer marketCap = 0;
+  private Long marketCap = 0L;
   /**
    * The week52High schema
    * <p>
@@ -495,7 +495,7 @@ public class IexQuote {
    */
   @JsonProperty("lastTradeTime")
   @JsonPropertyDescription("An explanation about the purpose of this instance.")
-  private Integer lastTradeTime = 0;
+  private Long lastTradeTime = 0L;
   /**
    * The isUSMarketOpen schema
    * <p>
@@ -589,7 +589,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("open")
-  public Integer getOpen() {
+  public Long getOpen() {
     return open;
   }
 
@@ -601,7 +601,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("open")
-  public void setOpen(Integer open) {
+  public void setOpen(Long open) {
     this.open = open;
   }
 
@@ -613,7 +613,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("openTime")
-  public Integer getOpenTime() {
+  public Long getOpenTime() {
     return openTime;
   }
 
@@ -625,7 +625,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("openTime")
-  public void setOpenTime(Integer openTime) {
+  public void setOpenTime(Long openTime) {
     this.openTime = openTime;
   }
 
@@ -661,7 +661,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("closeTime")
-  public Integer getCloseTime() {
+  public Long getCloseTime() {
     return closeTime;
   }
 
@@ -673,7 +673,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("closeTime")
-  public void setCloseTime(Integer closeTime) {
+  public void setCloseTime(Long closeTime) {
     this.closeTime = closeTime;
   }
 
@@ -805,7 +805,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("latestUpdate")
-  public Integer getLatestUpdate() {
+  public Long getLatestUpdate() {
     return latestUpdate;
   }
 
@@ -817,7 +817,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("latestUpdate")
-  public void setLatestUpdate(Integer latestUpdate) {
+  public void setLatestUpdate(Long latestUpdate) {
     this.latestUpdate = latestUpdate;
   }
 
@@ -829,7 +829,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("latestVolume")
-  public Integer getLatestVolume() {
+  public Long getLatestVolume() {
     return latestVolume;
   }
 
@@ -841,7 +841,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("latestVolume")
-  public void setLatestVolume(Integer latestVolume) {
+  public void setLatestVolume(Long latestVolume) {
     this.latestVolume = latestVolume;
   }
 
@@ -853,7 +853,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("volume")
-  public Integer getVolume() {
+  public Long getVolume() {
     return volume;
   }
 
@@ -865,7 +865,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("volume")
-  public void setVolume(Integer volume) {
+  public void setVolume(Long volume) {
     this.volume = volume;
   }
 
@@ -901,7 +901,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexRealtimeSize")
-  public Integer getIexRealtimeSize() {
+  public Long getIexRealtimeSize() {
     return iexRealtimeSize;
   }
 
@@ -913,7 +913,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexRealtimeSize")
-  public void setIexRealtimeSize(Integer iexRealtimeSize) {
+  public void setIexRealtimeSize(Long iexRealtimeSize) {
     this.iexRealtimeSize = iexRealtimeSize;
   }
 
@@ -925,7 +925,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexLastUpdated")
-  public Integer getIexLastUpdated() {
+  public Long getIexLastUpdated() {
     return iexLastUpdated;
   }
 
@@ -937,7 +937,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexLastUpdated")
-  public void setIexLastUpdated(Integer iexLastUpdated) {
+  public void setIexLastUpdated(Long iexLastUpdated) {
     this.iexLastUpdated = iexLastUpdated;
   }
 
@@ -973,7 +973,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("delayedPriceTime")
-  public Integer getDelayedPriceTime() {
+  public Long getDelayedPriceTime() {
     return delayedPriceTime;
   }
 
@@ -985,7 +985,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("delayedPriceTime")
-  public void setDelayedPriceTime(Integer delayedPriceTime) {
+  public void setDelayedPriceTime(Long delayedPriceTime) {
     this.delayedPriceTime = delayedPriceTime;
   }
 
@@ -1021,7 +1021,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("oddLotDelayedPriceTime")
-  public Integer getOddLotDelayedPriceTime() {
+  public Long getOddLotDelayedPriceTime() {
     return oddLotDelayedPriceTime;
   }
 
@@ -1033,7 +1033,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("oddLotDelayedPriceTime")
-  public void setOddLotDelayedPriceTime(Integer oddLotDelayedPriceTime) {
+  public void setOddLotDelayedPriceTime(Long oddLotDelayedPriceTime) {
     this.oddLotDelayedPriceTime = oddLotDelayedPriceTime;
   }
 
@@ -1117,7 +1117,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("extendedPriceTime")
-  public Integer getExtendedPriceTime() {
+  public Long getExtendedPriceTime() {
     return extendedPriceTime;
   }
 
@@ -1129,7 +1129,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("extendedPriceTime")
-  public void setExtendedPriceTime(Integer extendedPriceTime) {
+  public void setExtendedPriceTime(Long extendedPriceTime) {
     this.extendedPriceTime = extendedPriceTime;
   }
 
@@ -1165,7 +1165,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("previousVolume")
-  public Integer getPreviousVolume() {
+  public Long getPreviousVolume() {
     return previousVolume;
   }
 
@@ -1177,7 +1177,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("previousVolume")
-  public void setPreviousVolume(Integer previousVolume) {
+  public void setPreviousVolume(Long previousVolume) {
     this.previousVolume = previousVolume;
   }
 
@@ -1261,7 +1261,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexVolume")
-  public Integer getIexVolume() {
+  public Long getIexVolume() {
     return iexVolume;
   }
 
@@ -1273,7 +1273,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexVolume")
-  public void setIexVolume(Integer iexVolume) {
+  public void setIexVolume(Long iexVolume) {
     this.iexVolume = iexVolume;
   }
 
@@ -1285,7 +1285,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("avgTotalVolume")
-  public Integer getAvgTotalVolume() {
+  public Long getAvgTotalVolume() {
     return avgTotalVolume;
   }
 
@@ -1297,7 +1297,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("avgTotalVolume")
-  public void setAvgTotalVolume(Integer avgTotalVolume) {
+  public void setAvgTotalVolume(Long avgTotalVolume) {
     this.avgTotalVolume = avgTotalVolume;
   }
 
@@ -1333,7 +1333,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexBidSize")
-  public Integer getIexBidSize() {
+  public Long getIexBidSize() {
     return iexBidSize;
   }
 
@@ -1345,7 +1345,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexBidSize")
-  public void setIexBidSize(Integer iexBidSize) {
+  public void setIexBidSize(Long iexBidSize) {
     this.iexBidSize = iexBidSize;
   }
 
@@ -1381,7 +1381,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexAskSize")
-  public Integer getIexAskSize() {
+  public Long getIexAskSize() {
     return iexAskSize;
   }
 
@@ -1393,7 +1393,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("iexAskSize")
-  public void setIexAskSize(Integer iexAskSize) {
+  public void setIexAskSize(Long iexAskSize) {
     this.iexAskSize = iexAskSize;
   }
 
@@ -1405,7 +1405,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("marketCap")
-  public Integer getMarketCap() {
+  public Long getMarketCap() {
     return marketCap;
   }
 
@@ -1417,7 +1417,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("marketCap")
-  public void setMarketCap(Integer marketCap) {
+  public void setMarketCap(Long marketCap) {
     this.marketCap = marketCap;
   }
 
@@ -1525,7 +1525,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("lastTradeTime")
-  public Integer getLastTradeTime() {
+  public Long getLastTradeTime() {
     return lastTradeTime;
   }
 
@@ -1537,7 +1537,7 @@ public class IexQuote {
    *
    */
   @JsonProperty("lastTradeTime")
-  public void setLastTradeTime(Integer lastTradeTime) {
+  public void setLastTradeTime(Long lastTradeTime) {
     this.lastTradeTime = lastTradeTime;
   }
 
