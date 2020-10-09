@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.IexQuote;
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import java.io.IOException;
@@ -13,7 +14,12 @@ import junit.framework.TestCase;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {TestConfig.class})
 public class MarketDataDaoIntTest {
   private MarketDataDao dao;
 

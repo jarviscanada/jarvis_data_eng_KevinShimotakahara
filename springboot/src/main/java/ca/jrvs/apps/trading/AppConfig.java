@@ -7,6 +7,8 @@ import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import ca.jrvs.apps.trading.service.QuoteService;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.HttpClientConnection;
 import org.apache.http.conn.ConnectionRequest;
 import org.apache.http.conn.HttpClientConnectionManager;
@@ -33,6 +35,19 @@ public class AppConfig {
   public HttpClientConnectionManager httpClientConnectionManager(){
     return new PoolingHttpClientConnectionManager();
   }
+
+  @Bean
+  public DataSource dataSource() {
+    String url = System.getenv("PSQL_URL");
+    String user = System.getenv("PSQL_USER");
+    String password = System.getenv("PSQL_PASSWORD");
+    BasicDataSource basicDataSource = new BasicDataSource();
+    basicDataSource.setUrl(url);
+    basicDataSource.setUsername(user);
+    basicDataSource.setPassword(password);
+    return basicDataSource;
+  }
+
 
   /*@Bean
   public MarketDataDao marketDataDao(HttpClientConnectionManager httpClientConnectionManager,
