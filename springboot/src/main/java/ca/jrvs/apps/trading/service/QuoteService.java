@@ -67,11 +67,11 @@ public class QuoteService {
    */
   public static Quote buildQuoteFromIexQuote(IexQuote iexQuote){
     Quote quote = new Quote();
-    quote.setLastPrice(iexQuote.getLatestPrice() == null ? iexQuote.getLatestPrice() : -1);
-    quote.setBidSize(iexQuote.getIexBidSize().intValue());
-    quote.setBidPrice(iexQuote.getIexBidPrice());
-    quote.setAskSize(iexQuote.getIexAskSize().intValue());
-    quote.setAskPrice(iexQuote.getIexAskPrice());
+    quote.setLastPrice(iexQuote.getLatestPrice() == null ? -1 : iexQuote.getLatestPrice());
+    quote.setBidSize(iexQuote.getIexBidSize() == null ? -1 : iexQuote.getIexBidSize().intValue());
+    quote.setBidPrice(iexQuote.getIexBidPrice() == null ? -1 : iexQuote.getIexBidPrice());
+    quote.setAskSize(iexQuote.getIexAskSize() == null ? -1 : iexQuote.getIexAskSize().intValue());
+    quote.setAskPrice(iexQuote.getIexAskPrice() == null ? -1 : iexQuote.getIexAskPrice());
     quote.setTicker(iexQuote.getSymbol().toLowerCase());
 
     return quote;
