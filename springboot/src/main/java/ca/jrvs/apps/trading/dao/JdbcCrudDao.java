@@ -90,7 +90,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
   @Override
   public boolean existsById(Integer id) {
-    int rowCount = getJdbcTemplate().queryForObject("select count(*) from " + getTableName() + " WHERE id=?", Integer.class,id);
+    int rowCount = getJdbcTemplate().queryForObject("select count(*) from " + getTableName() + " WHERE " + getIdColumnName() + "=?", Integer.class,id);
     if(rowCount == 0)
       return false;
     return true;
@@ -120,7 +120,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
     } else{
       inClause.setCharAt(inClause.length()-1,')');
       String in = inClause.toString();
-      String selectSql = "SELECT * FROM " + getTableName() + " WHERE id IN " + in;
+      String selectSql = "SELECT * FROM " + getTableName() + " WHERE "+ getIdColumnName() + " IN " + in;
       List<T> things =  getJdbcTemplate()
           .query(selectSql, BeanPropertyRowMapper.newInstance(clazz));
       return things;
@@ -132,7 +132,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
     if (id == null) {
       throw new IllegalArgumentException("ID can't be null");
     }
-    String deleteSql = "DELETE FROM " + getTableName() + " WHERE id=?";
+    String deleteSql = "DELETE FROM " + getTableName() + " WHERE "+ getIdColumnName() + "=?";
     getJdbcTemplate().update(deleteSql, id);
   }
 

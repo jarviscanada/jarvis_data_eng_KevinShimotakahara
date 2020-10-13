@@ -3,15 +3,18 @@ package ca.jrvs.apps.trading.dao;
 import ca.jrvs.apps.trading.model.domain.Entity;
 import ca.jrvs.apps.trading.model.domain.Position;
 import java.util.List;
+import java.util.Optional;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PositionDao extends JdbcCrudDao<Position> {
-  private final String TABLE_NAME = "security_order";
+  private final String TABLE_NAME = "position";
   private final String ID_COLUMN = "account_id";
 
   private JdbcTemplate jdbcTemplate;
@@ -69,6 +72,20 @@ public class PositionDao extends JdbcCrudDao<Position> {
   public void deleteAll(Iterable<? extends Position> iterable) {
     throw new UnsupportedOperationException("Not implemented");
   }
+
+//  @Override
+//  public Optional<List<Position>> findById(Integer id) {
+//    Optional<List<Position>> entity = Optional.empty();
+//    String selectSql = "SELECT * FROM " + getTableName() + " WHERE " + getIdColumnName() + "=?";
+//
+//    try {
+//      entity = Optional.ofNullable((T) getJdbcTemplate()
+//          .queryForObject(selectSql, BeanPropertyRowMapper.newInstance(getEntityClass()), id));
+//    } catch (IncorrectResultSizeDataAccessException e) {
+//      logger.debug("Can't find trader id:" + id, e);
+//    }
+//    return entity;
+//  }
 
   /**
    * As the position table is read only since it is actually a view, it does not make sense

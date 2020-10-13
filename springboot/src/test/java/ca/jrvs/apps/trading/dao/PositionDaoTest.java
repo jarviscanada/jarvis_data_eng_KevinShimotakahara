@@ -40,7 +40,9 @@ public class PositionDaoTest {
 
   private Trader savedTrader;
   private Quote savedQuote;
+  private Quote savedQuote2;
   private SecurityOrder savedSecurityOrder;
+  private SecurityOrder savedSecurityOrder2;
   private Account savedAccount;
   private Position savedPosition;
 
@@ -72,6 +74,17 @@ public class PositionDaoTest {
 
     quoteDao.save(savedQuote);
 
+
+    savedQuote2 = new Quote();
+    savedQuote2.setAskPrice(10d);
+    savedQuote2.setAskSize(10);
+    savedQuote2.setBidPrice(10.2d);
+    savedQuote2.setBidSize(10);
+    savedQuote2.setId("fb");
+    savedQuote2.setLastPrice(10.1d);
+
+    quoteDao.save(savedQuote2);
+
     savedSecurityOrder = new SecurityOrder();
     savedSecurityOrder.setAccount_id(1);
     savedSecurityOrder.setId(1);
@@ -82,6 +95,18 @@ public class PositionDaoTest {
     savedSecurityOrder.setTicker("aapl");
 
     securityOrderDao.save(savedSecurityOrder);
+
+    savedSecurityOrder2 = new SecurityOrder();
+    savedSecurityOrder2.setAccount_id(1);
+    savedSecurityOrder2.setId(2);
+    savedSecurityOrder2.setNotes("oh hai");
+    savedSecurityOrder2.setPrice(12.34f);
+    savedSecurityOrder2.setSize(20);
+    savedSecurityOrder2.setStatus("FILLED");
+    savedSecurityOrder2.setTicker("fb");
+
+    securityOrderDao.save(savedSecurityOrder2);
+
     savedPosition = positionDao.findAll().get(0);
   }
 
@@ -97,7 +122,7 @@ public class PositionDaoTest {
   public void findAllById() {
     List<Position> positions = Lists
         .newArrayList(positionDao.findAllById(Arrays.asList(savedPosition.getId(), -1)));
-    assertEquals(1,positions.size());
+    assertEquals(2,positions.size());
     assertEquals(savedPosition.getPosition(),positions.get(0).getPosition());
   }
 
