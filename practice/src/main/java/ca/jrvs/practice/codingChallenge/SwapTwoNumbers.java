@@ -1,5 +1,8 @@
 package ca.jrvs.practice.codingChallenge;
 
+/**
+ * https://www.notion.so/Swap-two-numbers-d26a6d51dd0a40cc81892ed00f60ff25
+ */
 public class SwapTwoNumbers {
   public int[] swapTwoNumbers(int[] arr){
     if(arr.length != 2)
