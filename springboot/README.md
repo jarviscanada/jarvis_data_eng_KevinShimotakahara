@@ -1,9 +1,9 @@
 Table of contents
 * [Introduction](#Introduction)
-* [Quick Start](#Quick Start)
+* [Quick Start](#quick-start)
 * [Architecture](#Architecture)
-* [REST API Usage](#REST API Usage)
-* [Docker Deployment](#Docker Deployment)
+* [REST API Usage](#rest-api-usage)
+* [Docker Deployment](#docker-deployment)
 * [Improvements](#Improvements)
 
 # Introduction
@@ -41,6 +41,7 @@ design concepts were used to develop this application, including the following:
  - Leveraging RESTful HTTP clients to access IEX stock data
 
 # Quick Start
+
 ## Prerequisites
 This project relies on Docker 17.05 or higher, and was
 performed on a CentOS 7 Linux distribution.
