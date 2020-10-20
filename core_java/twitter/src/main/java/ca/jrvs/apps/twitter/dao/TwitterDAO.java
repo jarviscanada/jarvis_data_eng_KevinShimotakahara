@@ -113,7 +113,6 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
       }else{
         throw new RuntimeException("Unexpected HTTP status: " + status);
       }
-
     }
 
     if(response.getEntity() == null){

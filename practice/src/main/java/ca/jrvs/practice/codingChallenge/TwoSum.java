@@ -21,7 +21,7 @@ public class TwoSum {
 
   public int[] twoSumA2(int[] nums, int target){
     //sorted array version
-    //Sort can be as good as O(1) if heap sort is used
+    //Sort can be as good as O(n*log(n)) if merge sort is used
     Arrays.sort(nums);
 
     //This is O(n*log(n)) complexity because we use one for loop O(n) and perform a binary search
