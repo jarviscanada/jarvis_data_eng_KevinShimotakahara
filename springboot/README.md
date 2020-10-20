@@ -153,7 +153,7 @@ visiting this URL, and creating a trader account:
 Below is a diagram of the trading application's architecture. We implement
 an MVC design pattern to organize our Java code into manageable system components.
 To use our software, a client makes a RESTful HTTP request through our web
-application. This Http request is then handled by Apache Tomcat, and depending
+application. This HTTP request is then handled by Apache Tomcat, and depending
 on the endpoint, sends its details to the appropriate controller class that can
 process the request. Moreover, we use Spring framework to manage all the
 dependencies in our project. The configuration of both Apache Tomcat and Spring
@@ -285,7 +285,7 @@ of 0, and own no stocks.
 and their account. Trader must have no assets when this
 request is sent.
 
-##Order Controller
+## Order Controller
 The order controller is used to place market orders to
 buy/sell securities. At the moment, we simulate market
 orders by generating a security order record that is
