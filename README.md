@@ -9,11 +9,11 @@ The work I enjoy most is solving problems with computers while applying principl
 
 ## Skills
 
-**Proficient:** Java, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Reinforcement Learning Algorithm Design, Microsoft Office
+**Proficient:** Java, Python, Matlab, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Reinforcement Learning Algorithm Design, SpringBoot, Apache Maven, JDBC
 
-**Competent:** Spring, Apache Maven, JUnit/Mockito, RESTful APIs, Python, Matlab, Microsoft Excel/Access VBA, Time Series Data Analysis, Overleaf (LaTeX)
+**Competent:** JUnit/Mockito, RESTful APIs, Time Series Data Analysis, Machine Learning/TensorFlow, Overleaf (LaTeX)
 
-**Familiar:** JDBC, Assembly Language, Microcontrollers, Computer Processor Fundementals, i.e. How to Build out of Digital Electronics Components, C/C++
+**Familiar:** Assembly Language, Microcontrollers, Numerical Methods, Python/Flask web applications, C/C++
 
 ## Jarvis Projects
 
@@ -25,11 +25,11 @@ The database host setup has been automated with shell scripts, and a .sql file h
 
 **Core Java Apps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/core_java)]:
       
-  - Twitter API App: This application allows a user to post, read, and delete Tweets from the Linux Command Line Interface. Our Dockerized Java program accepts a Twitter Developer's OAuth 1.0 credentials needed to be serviced by the Twitter REST API, in addition to the information about the post/show/delete Tweet action to be performed as command line inputs. The application then proceeds to contact the Twitter API to fulfill the request, and prints the JSON file(s) containing information about the Tweets that the user just posted/read/deleted.
+  - Twitter API App: This application allows a user to post, read, and delete Tweets from the Linux Command Line Interface. Our Dockerized Java program accepts a Twitter Developer's OAuth 1.0 credentials needed to be serviced by the Twitter REST API, in addition to the information about the post/show/delete Tweet action to be performed as command line inputs. The application then proceeds to contact the Twitter API to fulfill the request, and prints the JSON file(s) containing information about the Tweets that the user just posted/read/deleted. Apache Maven was used in this project for organizing its build workflow; part of this workflow includes unit/integration test phases, where Maven commands can execute rigorous software test scripts written with the JUnit test framework.
   - JDBC App: This application sets up a connection via the JDBC API to a PostGreSQL database that manages a business' customer and order records. The core concept of this project was to develop objects that can streamline the process of building Strings that contain SQL statements which can be fed to JDBC APIs, whereupon the PostGreSQL driver that implements the JDBC interfaces can forward the SQL statements to the database application, and receive its response.
   - Grep App: This application recreates partial functionality of the grep command commonly used in the Linux command line. More specifically, given an input regular expression, directory, and output path/filename, it will search through all files found in the directory and all its sub directories for instances of the regular expression, and print the lines of text containing these instances into the indicated file. This app leverages Java streams to remain functional when its heap memory is smaller than the files it is reading.
 
-**SpringBoot Microservice Stock Trading App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/springboot)]: This project created a stock trading application, where users could interact with a web server to create an online account that they could deposit funds within, and then proceed to build and manage a securities portfolio. We provide up to date stock information from the online IEX stock exchange for our users to keep their investment strategies well informed.  This web application uses SpringBoot to automatically configure Apache Tomcat, a Java webapplet that can forward client requests to the components of our code that can handle them, while converting the requests into a format our code can understand. SpringBoot was also used to facilitate constructing our application's interdependent objects, and utilizing JDBC drivers to access our local database.
+**SpringBoot Microservice Stock Trading App (REST API)** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/springboot)]: This project created a stock trading service in the form of a SpringBoot REST API application, where users could interact with a web server to create an online account that they could deposit funds within, and then proceed to build and manage a securities portfolio. We provide up to date stock information from the online IEX stock exchange for our users to keep their investment strategies well informed.  This web application uses SpringBoot to automatically configure Apache Tomcat, a Java webapplet that can forward client requests to the components of our code that can handle them, while converting the requests into a format our code can understand. SpringBoot was also used to facilitate constructing our application's interdependent objects, and utilizing JDBC drivers to access our local database.
 
 **Hadoop** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/hadoop)]: Not Started
 
