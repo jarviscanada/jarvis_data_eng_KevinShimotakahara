@@ -74,6 +74,7 @@ expressed visually by the plots below:
 
 ## Outlier-Filtered Distribution of Invoice Prices
 ![my image](./assets/dataDist.png)
+
 This plot represents up to the 85th quantile of
 invoice purchase records. The mean purchase value
 for an order made by customers of this business
@@ -81,11 +82,13 @@ was calculated to be £ 271.68.
 
 ## Monthly Active Users
 ![my image](./assets/monthlyActiveUsers.png)
+
 This plot shows a stagnant yet seasonal trend
 in monthly user activity.
 
 ## Monthly Revenue
 ![my image](./assets/monthlyRevenue.png)
+
 The monthly revenue appears to be correlated
 to the active monthly users, which is not
 surprising. Note that the vertical axis values
@@ -94,13 +97,18 @@ are in millions of pounds.
 ## Month to Month Changes in Revenue
 ![my image](./assets/revenueGrowth.png)
 
+This "revenue growth" plot shows the percentage
+variation in revenue relative to the previous month.
+
 ## New Users Vs. Existing Users
 ![my image](./assets/newExistingUsers.png)
+
 Despite the existing users being reasonably steady,
 the number of new users seem to be trending downward.
 
 ## Placed Orders Vs. Cancelled Orders
 ![my image](./assets/placeCancel.png)
+
 It appears as though there are many canceled orders
 present in the data. Perhaps new business strategies
 can be used to better close transactions.
