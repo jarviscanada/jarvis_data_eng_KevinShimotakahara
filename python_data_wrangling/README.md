@@ -127,12 +127,12 @@ scores range from 1-5:
 - Loyal Customers [Recency = 3-4, Frequency = 4-5]
 - Potential Loyalists [Recency = 4-5, Frequency = 2-3]
 - Promising [Recency = 3-4, Frequency = 0-1]
-- Can't Lose Them [Recency = 1-2), Frequency = 4-5]
-- At Risk [Recency = 1-2), Frequency = 3-4]
-- About to Sleep [Recency = 2-3), Frequency = 1-2]
-- Hibernating [Recency = 1-2), Frequency = 1-2]
-- New Customers [Recency = 4-5), Frequency = 0-1]
-- Need Attention [Recency = 2-3), Frequency = 2-3]
+- Can't Lose Them [Recency = 1-2, Frequency = 4-5]
+- At Risk [Recency = 1-2, Frequency = 3-4]
+- About to Sleep [Recency = 2-3, Frequency = 1-2]
+- Hibernating [Recency = 1-2, Frequency = 1-2]
+- New Customers [Recency = 4-5, Frequency = 0-1]
+- Need Attention [Recency = 2-3, Frequency = 2-3]
 
 Despite calculating Magnitude scores for each
 customer, we did not use Magnitude to classify
@@ -180,7 +180,7 @@ purchase.
 - 1535 of London Gift Shop's customers are "Hibernating"
 - The last shopping date of the customers is on average 487 days before the first day after the last day in the provided data (January 1st, 2020).
 - Customers made an average of 1 purchases.
-- Customers spent an average of £ 340.
+- Customers spent an average of £ 340.03.
     
 ### "Champions" Segment:
 Customers in this segment are responsible for 
