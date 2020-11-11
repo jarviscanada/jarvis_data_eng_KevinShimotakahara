@@ -19,8 +19,8 @@ included in this prototype can be summarized in terms of the following functions
 - Submitting market orders for buying and selling stocks
 - View state of trader's profile, account, and stock portfolio
 
-This API is intended to be used by Jarvis front end developers that
-are tasked with developing its user interface to our clientele can enjoy an excellent
+A user interface for this API is to be designed by Jarvis front end developers,
+so our clientele can enjoy a visual and intuitive
 online trading experience. Tech-savvy traders looking to use our services to 
 programmatically buy and sell stocks online are also another demographic that may find this
 API useful.
