@@ -166,7 +166,7 @@ The campaign to be implemented for these customers
  
 **Analysis of this Segment:**
 - 85 of London Gift Shop's customers "Can't be Lost"
-- The last shopping date of the customers is on average 343 days before the first day after the last day in the provided data (January 1st, 2020).
+- The last shopping date of the customers is on average 343 days before the first day after the last day in the provided data (January 1st, 2012).
 - Customers have made an average of 17.7 purchases.
 - Customers spent an average of £ 5725.64.
 
@@ -178,7 +178,7 @@ purchase.
 
 **Analysis of this Segment:**
 - 1535 of London Gift Shop's customers are "Hibernating"
-- The last shopping date of the customers is on average 487 days before the first day after the last day in the provided data (January 1st, 2020).
+- The last shopping date of the customers is on average 487 days before the first day after the last day in the provided data (January 1st, 2012).
 - Customers made an average of 1 purchases.
 - Customers spent an average of £ 340.03.
     
@@ -189,7 +189,7 @@ implemented to ensure the continuity of the
 shopping of these customers.
 
 - 856 of London Gift Shop's customers are "Champions"
-- The last shopping date of the customers is on average 30 days before the first day after the last day in the provided data (January 1st, 2020).
+- The last shopping date of the customers is on average 30 days before the first day after the last day in the provided data (January 1st, 2012).
 - Customers made an average of 24 purchases.
 - Customers spent an average of £ 10510.94.
    
