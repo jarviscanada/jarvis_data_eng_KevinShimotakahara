@@ -13,7 +13,7 @@ The work I enjoy most is solving problems with computers while applying the prin
 
 **Competent:** JUnit/Mockito, RESTful APIs, Time Series Data Analysis, Machine Learning/TensorFlow, Overleaf (LaTeX)
 
-**Familiar:** Assembly Language, Microcontrollers, Numerical Methods, Python/Flask web applications, C/C++
+**Familiar:** Google Cloud Platform, Big Data Analytics, e.g. Hadoop, Microsoft Azure, Python/Flask web applications, C/C++
 
 ## Jarvis Projects
 

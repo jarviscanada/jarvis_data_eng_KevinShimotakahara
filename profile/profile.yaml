@@ -33,9 +33,9 @@ skills:
     - Overleaf (LaTeX)
   # At least 5 skills
   familiar:
-    - Assembly Language
-    - Microcontrollers
-    - Numerical Methods
+    - Google Cloud Platform
+    - Big Data Analytics, e.g. Hadoop
+    - Microsoft Azure
     - Python/Flask web applications
     - C/C++
 
