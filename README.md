@@ -13,7 +13,7 @@ The work I enjoy most is solving problems with computers while applying the prin
 
 **Competent:** JUnit/Mockito, RESTful APIs, Time Series Data Analysis, Machine Learning/TensorFlow, Overleaf (LaTeX)
 
-**Familiar:** Google Cloud Platform, Big Data Analytics, e.g. Hadoop, Microsoft Azure, Python/Flask web applications, C/C++
+**Familiar:** Google Cloud Platform, Big Data Analytics, Hadoop/Hive/Zeppelin, Microsoft Azure, Python/Flask web applications, C/C++
 
 ## Jarvis Projects
 
@@ -33,7 +33,7 @@ The database host setup has been automated with shell scripts, and a .sql file h
 
 **Python Data Analytics** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/python_data_wrangling)]: This project analyzed an e-commerce store's customer transaction data using Python/Jupyter Notebook to process data stored in a PostgreSQL data warehouse. The sample distribution of purchase magnitudes was plotted and outlier data was managed for more meaningful sample statistics. Monthly revenue streams and customer activity were also analyzed visually. Finally, formal Recency, Frequency, Magnitude analysis was conducted on the store's clientele, classifying them into 11 different categories based on their behaviour. Three important categories were identified, and targeted marketing campaigns were suggested for these groups.
 
-**Hadoop** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/hadoop)]: Not Started
+**Hadoop** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/hadoop)]: I am currently engaged in this project, which uses Google Cloud Platform to provision a Hadoop cluster to store a CSV file containing World Development Indicator data in a Hadoop Distributed File System. I am currently running Hive queries on the distributed dataset with the help of both Beeline and Zeppelin user interfaces to extract insights into the state of the world we live in.
 
 **Spark** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/spark)]: Not Started
 

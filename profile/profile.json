@@ -69,7 +69,7 @@
       "name": "Python Data Analytics"
     },
     {
-      "description": "",
+      "description": "I am currently engaged in this project, which uses Google Cloud Platform to provision a Hadoop cluster to store a CSV file containing World Development Indicator data in a Hadoop Distributed File System. I am currently running Hive queries on the distributed dataset with the help of both Beeline and Zeppelin user interfaces to extract insights into the state of the world we live in.",
       "git_url": "/hadoop",
       "name": "Hadoop"
     },
@@ -139,7 +139,8 @@
     ],
     "familiar": [
       "Google Cloud Platform",
-      "Big Data Analytics, e.g. Hadoop",
+      "Big Data Analytics",
+      "Hadoop/Hive/Zeppelin",
       "Microsoft Azure",
       "Python/Flask web applications",
       "C/C++"
