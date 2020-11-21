@@ -4,7 +4,7 @@
 * [Hive Project](#Hive-Project)
 * [Improvements](#Improvements)
 # Introduction
-The Jarvis data analytics team wants to process Big Data, and need to 
+The Jarvis data analytics team wants to process Big Data, and must 
 adopt new technologies to handle it. This project
 explores Apache Hadoop (a widely known Big Data platform) on behalf
 of the Jarvis data analytics team. Hadoop is an entire ecosystem of
