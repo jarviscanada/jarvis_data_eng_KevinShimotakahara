@@ -4,8 +4,8 @@
 * [Hive Project](#Hive-Project)
 * [Improvements](#Improvements)
 # Introduction
-The Jarvis data analytics team wants to process Big Data, and are
-in need of adopting technologies required to handle it. This project
+The Jarvis data analytics team wants to process Big Data, and need to 
+adopt new technologies to handle it. This project
 explores Apache Hadoop (a widely known Big Data platform) on behalf
 of the Jarvis data analytics team. Hadoop is an entire ecosystem of
 sophisticated tools used to manage and leverage a distributed information
@@ -14,17 +14,17 @@ most ambitious Big Data projects.
 
 The scope of this project was to try the different tools
 the Hadoop ecosystem has to offer by first implementing a small 
-Hadoop Distributed File System (HDFS) on a three node cluster, and 
-then using high level applications and web interfaces to store a large
+Hadoop Distributed File System (HDFS) on a three-node cluster, and 
+then using high-level applications and web interfaces to store a large
 data file in the HDFS and run queries on it.
 
-The HDFS was implemented using Google Cloud Platform, using YARN as
-its computational resource manager. We ran Apache Hive on top of YARN,
-using it to enable one to pass SQL-like (Hive Query Language, or HQL)
-statements to our cluster, and have Hive translate them into execution
+The HDFS was implemented using Google Cloud Platform, with YARN as
+its computational resource manager. Apache Hive was run on top of YARN,
+so we could pass SQL-like (Hive Query Language, or HQL)
+statements to Hive translate them into execution
 engine tasks runnable in YARN (e.g. MapReduce). To interact with Hive, we leveraged both
 Zeppelin Notebook and Beeline interfaces. Concerning the data we
-to stored/examined in/with our Hadoop cluster, we chose a 1.8 Gb file
+stored/examined in/with our Hadoop cluster, we chose a 1.8 Gb file
 containing World Development Indicator information.
 
 This project offered a rich learning experience; many different 
@@ -56,15 +56,15 @@ Below is an architecture diagram of our Hadoop cluster:
 Inside the master node, there exists a layered application architecture.
 The lowest layer is the HDFS Name Node entity, which is used to manage
 the storage of data among the HDFS Data Nodes hosted on the worker nodes
-in our cluster. The state of the HDFS can be interacted with by either
-tasks running in YARN containers (more on this later), or directly
+in our cluster. The state of the HDFS can be interacted with either by
+tasks running in YARN containers (more on this later) or directly
 by a person using a web user interface (WebUI). Ultimately, the HDFS
 offers a scalable solution to storing lots of massive files, by
 breaking them up into 128 Mb chunks and storing multiple redundant
-copies of these chunks over multiple commodity grade computers.
+copies of these chunks over multiple commodity-grade computers.
 The benefits of this approach are twofold: one can scale data storage
-horizontally with cheap hardware, while also enabling parallel execution
-of computation and disk read/write tasks.
+horizontally with cheap hardware, while also enabling the parallel execution
+of tasks.
 
 The HDFS is operated on by the "YARN layer",
 which manages the computational resources in the Hadoop cluster.
@@ -86,7 +86,7 @@ application that translates Hive Query Language (HQL) commands into
 something that an execution engine can understand. This conversion
 of HQL to execution engine tasks is the core functionality of Apache
 Hive, which is running on our master node. Hive is what makes interacting
-with data in a HDFS much like interacting with a RDBMS through SQL commands.
+with data in an HDFS much like interacting with an RDBMS through SQL commands.
 Hive manages table metadata required to serialize and deserialize
 data to/from tabular objects readable by code and files stored
 in the HDFS. A "metastore" microservice provisions such functionality,
@@ -104,16 +104,16 @@ and YARN was allocated 4 processor cores and 12 Gb of RAM from the cluster.
 
 # Hive Project
 The image below is a complete screenshot of the Zeppelin Notebook
-created for this project, and contains all results, complete with
+created for this project and contains all results, complete with
 annotations.
 
-Essentially in this notebook, we imported a large file containing half
-a century's worth of World Development Indicator data into our HDFS,
-and used Apache Hive to create table schema for it, so it could be
-queried with HQL commands. A couple business questions were answered,
+In this notebook, we imported a large file containing half
+a century's worth of World Development Indicator data into our HDFS
+and used Apache Hive to create a table schema for it, so it could be
+queried with HQL commands. A couple of business questions were answered,
 e.g. finding out the largest percentage growth in GDP in a single year
 each country experienced in recent history, in addition to the year
-it occurred. We also explored how to properly import CSV data using
+in which it occurred. We also explored how to properly import CSV data using
 OpenCSVserde and views; ways to improve query speeds with Hive partitions and use of the
 Parquet column-oriented binary file format; and the difference in query
 performance between Hive and Spark.
