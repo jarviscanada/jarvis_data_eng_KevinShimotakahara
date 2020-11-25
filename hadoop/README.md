@@ -20,9 +20,8 @@ data file in the HDFS and run queries on it.
 
 The HDFS was implemented using Google Cloud Platform, with YARN as
 its computational resource manager. Apache Hive was run on top of YARN,
-so we could pass SQL-like (Hive Query Language, or HQL)
-statements to Hive translate them into execution
-engine tasks runnable in YARN (e.g. MapReduce). To interact with Hive, we leveraged both
+so we could write SQL-like (Hive Query Language, or HQL)
+statements to query data in our cluster. To interact with Hive, we leveraged both
 Zeppelin Notebook and Beeline interfaces. Concerning the data we
 stored/examined in/with our Hadoop cluster, we chose a 1.8 Gb file
 containing World Development Indicator information.
