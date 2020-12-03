@@ -64,6 +64,17 @@ The diagram below provides a high level overview of how the different technologi
 
 ![my image](./assets/SparkDatabricks.png)
 
+There are three main components to our information system, namely the Azure Databricks Workspace, Azure Storage, and Azure Virtual Machine. 
+
+Azure Databricks Workspace is a manifestation of the Databricks application installed on Azure cloud computing resources. 
+Databricks provides a complete solution to the setup of a big data analytics coding environment, offering a suite of user interfaces that make data ingestion and
+cluster setup a point and click process. Moreover, Databricks also offers a notebook development environment complete with an underlying implementation of Apache Spark
+on the automatically provisioned data clusters. Another useful component of Databricks
+is the Databricks Distributed File System (DBFS), which abstracts away the implementation details of the underlying data storage mechanism used to manage the data nodes of the cluster. Through the DBFS interface, the user can find and interact with files stored on data nodes with simple path names (i.e., "dbfs:/...") regardless of what software is implementing the distributed storage system, be it a Hadoop Distributed File System, Azure Storage, S3, etc.. In our case, we are using Azure Storage.
+
+The Spark Application is implemented by Databricks, and runs on virtual machines
+belonging to a data cluster provisioned by Azure Virtual Machine. Within this data cluster, there are different Java Virtual Machines (JVMs) running that constitute the different components of the Spark Application. The Driver Process serves as the core of the Spark Application, as it maintains information about the Spark Application; responds to the user input fed to it through the Databricks notebook interface; and performs analysis on the work the Spark execution engine must perform, figuring out how to break down the work into jobs, stages, and tasks to be sent to execution nodes that operate on data partitions in the cluster. The Spark Driver makes use of a Hive Metastore to manage the table schema used to interpret the source data so it can be manipulated and represented properly by the Spark Application. The Cluster Manager manages JVM resources in the cluster, allocating them as required to the Spark Application.
+
 ## Databricks Notebook
 [Link to .ipynb file](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/blob/develop/spark/notebook/RetailDataAnalyticswithPySpark.ipynb) 
 ![my image](./assets/databricksScreenShot.png)
