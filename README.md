@@ -13,7 +13,7 @@ The work I enjoy most is solving problems with computers while applying the prin
 
 **Competent:** JUnit/Mockito, RESTful APIs, Time Series Data Analysis, Machine Learning/TensorFlow, Overleaf (LaTeX)
 
-**Familiar:** Assembly Language, Microcontrollers, Numerical Methods, Python/Flask web applications, C/C++
+**Familiar:** Google Cloud Platform, Microsoft Azure, Big Data Analytics, Hadoop/Hive/Zeppelin, Apache Spark, Azure Databricks, PySpark, Python/Flask web applications, C/C++
 
 ## Jarvis Projects
 
@@ -35,7 +35,7 @@ The database host setup has been automated with shell scripts, and a .sql file h
 
 **Hadoop** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/hadoop)]: This project used Google Cloud Platform to provision a Hadoop cluster to store a CSV file containing World Development Indicator data in a Hadoop Distributed File System. Hive queries were designed and executed on the distributed dataset with the help of both Beeline and Zeppelin user interfaces to extract insights into the state of the world we live in. Query speeds were optimized through the use of Hive partitions and Parquet file formatting.
 
-**Spark** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/spark)]: Not Started
+**Spark** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/spark)]: This project used Microsoft Azure Databricks to perform big data analytics workflows on retail transaction data that involved ingesting source data into a distributed file system; provisioning VM clusters; and running an Apache Spark Application as a distributed execution engine on top of a notebook user interface where PySpark code was written to run queries that answered key business questions. The queries performed in this project were the same as those performed in the aforementioned Python Data Analytics project, except PySpark DataFrames were used to characterize the queries instead of Pandas DataFrames.
 
 **Cloud/DevOps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/cloud_devops)]: Not Started
 
