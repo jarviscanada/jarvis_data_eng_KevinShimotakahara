@@ -81,13 +81,46 @@ belonging to a data cluster provisioned by Azure Virtual Machine. Within this da
 
 # Zeppelin/Spark Over YARN/Hadoop Implementation
 - Describe the dataset and your analytics work (make sure you create a link to your ipynb)
-- Describe the architecture (e.g. Zeppelin, GCP, Hadoop, Hive Metastore, PySpark, data flow, etc..)
-- Draw an architecture diagram
+## Description of Input Data
+The data set we are working with in Zeppelin/Spark/YARN/Hadoop consists of World Developer Index information for the different countries of the world stored in a .csv file.
+Its schema has been summarized in the following table:
+
+Field Name | Data Type | Description
+---------- | --------- | -----------
+year       | integer   | Year the indicator metric corresponds to
+countryName| string    | Country the indicator metric corresponds to
+countryCode| string    | Country code
+indicatorName| string  | Description of what the indicator metric represents
+indicatorCode| string  | Unique ID for the indicator metric
+indicatorValue| float  | The value of the indicator metric
+
+## Description of Data Analytics Workflow
+The setup of the Hadoop cluster and Zeppelin UI was performed in [a previous project](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/develop/hadoop). Ultimately, Google Cloud Project (GCP) Dataproc was used to build a VM cluster with HDFS/YARN installed on it, and the WDI CSV data was manually ingested from Google Storage into the HDFS via an SSH connection into the master node. GCP was also used to access a Zeppelin web interface to write Hive queries that can ultimately be translated to Mapreduce or Tez jobs to run analytics on our distributed data file.
+
+We reuse this setup as an excercise to acquaint ourselves with the PySpark API, figuring out how to convert SQL queries we are already comfortable with into Spark DataFrame queries that do the same thing. To use PySpark in Zeppelin instead of Hive, we simply need to specify the appropriate interpreter for each paragraph in the Zeppelin notebook. In the upcoming notebook screenshot, you will observe the following queries being made using both SQL and PySpark DataFrames:
+
+1. Historical Annual GDP Growth of Canada
+2. GDP for Each Country Sorted by Year
+3. Highest GDP for Each Country
+
+## Data Analytics System Architecture
+The diagram below provides a high level overview of how the different technologies used in this project relate to one another, and how the information flows between them:
 
 ![my image](./assets/HadoopZeppelin.png)
+
+Inside the master node, there exists a layered application architecture. The lowest layer is the HDFS Name Node entity, which is used to manage the storage of data among the HDFS Data Nodes hosted on the worker nodes in our cluster. The state of the HDFS can be interacted with either by tasks running in YARN containers (more on this later) or directly by a person using a web user interface (WebUI). Ultimately, the HDFS offers a scalable solution to storing lots of massive files, by breaking them up into 128 Mb chunks and storing multiple redundant copies of these chunks over multiple commodity-grade computers. The benefits of this approach are twofold: one can scale data storage horizontally with cheap hardware, while also enabling the parallel execution of tasks.
+
+The HDFS is operated on by the "YARN layer", which manages the computational resources in the Hadoop cluster. On the master node, there is a YARN Resource Manager that provisions computational resources for "Application Masters", which are fed by YARN clients and are in charge of running application tasks. Application Masters do this by asking the YARN Resource Manager for computational resources in the form of "containers", where each container is a Java Virtual Machine (JVM) that can run some program, or "task" needed for the application to function. Once granted containers, the Application manager tells the appropriate YARN Node Manager(s) to run their tasks for them.
+
+The "YARN client" previously mentioned passes "execution engine" (e.g. MapReduce, Tez, Spark) jobs to the YARN resource manager, and in our case the Spark Application as a whole is passed to YARN, whereupon a Spark Driver and Executor nodes are created in containers in a rather involved process that the details of which are beyond the scope of this project. In abstract terms, all that needs to be understood is that YARN aids in the allocation of JVM resources required to run the Spark Application, which consists of a Driver JVM and Executor JVMs. The role of the Driver and Executor nodes have already been described in the previous architecture section, and are no different here.
 
 ## Zeppelin Notebook
 ![my image](./assets/zeppelinSparkScreenShot.png)
 
 # Future Improvement
-- List at least three future improvements for this project
+This project only scratched the surface of what Spark/Databricks has to offer. Future work that would be valueable to perform includes but is not limited to:
+- Plot invoice price distribution, RFM groupings, monthly time series data
+- Try out some Spark high level APIs, e.g. Machine Learning and Data Streaming
+- Experiment with RDD low-level API
+- Recast PySpark code into equivalent Scala code, compare performance
+- Investigate all the features of the Spark UI, try using it to better design data queries
