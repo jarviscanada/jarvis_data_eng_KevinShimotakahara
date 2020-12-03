@@ -69,7 +69,7 @@
       "name": "Python Data Analytics"
     },
     {
-      "description": "",
+      "description": "This project used Google Cloud Platform to provision a Hadoop cluster to store a CSV file containing World Development Indicator data in a Hadoop Distributed File System. Hive queries were designed and executed on the distributed dataset with the help of both Beeline and Zeppelin user interfaces to extract insights into the state of the world we live in. Query speeds were optimized through the use of Hive partitions and Parquet file formatting.",
       "git_url": "/hadoop",
       "name": "Hadoop"
     },

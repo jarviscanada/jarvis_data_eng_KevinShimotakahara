@@ -33,7 +33,7 @@ The database host setup has been automated with shell scripts, and a .sql file h
 
 **Python Data Analytics** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/python_data_wrangling)]: This project analyzed an e-commerce store's customer transaction data using Python/Jupyter Notebook to process data stored in a PostgreSQL data warehouse. The sample distribution of purchase magnitudes was plotted and outlier data was managed for more meaningful sample statistics. Monthly revenue streams and customer activity were also analyzed visually. Finally, formal Recency, Frequency, Magnitude analysis was conducted on the store's clientele, classifying them into 11 different categories based on their behaviour. Three important categories were identified, and targeted marketing campaigns were suggested for these groups.
 
-**Hadoop** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/hadoop)]: Not Started
+**Hadoop** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/hadoop)]: This project used Google Cloud Platform to provision a Hadoop cluster to store a CSV file containing World Development Indicator data in a Hadoop Distributed File System. Hive queries were designed and executed on the distributed dataset with the help of both Beeline and Zeppelin user interfaces to extract insights into the state of the world we live in. Query speeds were optimized through the use of Hive partitions and Parquet file formatting.
 
 **Spark** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/spark)]: Not Started
 
