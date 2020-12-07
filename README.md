@@ -11,9 +11,9 @@ The work I enjoy most is solving problems with computers while applying the prin
 
 **Proficient:** Java, Python, Matlab, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Reinforcement Learning Algorithm Design, SpringBoot, Apache Maven, JDBC
 
-**Competent:** JUnit/Mockito, RESTful APIs, Time Series Data Analysis, Machine Learning/TensorFlow, Overleaf (LaTeX)
+**Competent:** JUnit/Mockito, Google Cloud Platform, Microsoft Azure and Databricks, Hadoop/Hive/Zeppelin, Apache Spark, Machine Learning/TensorFlow, Overleaf (LaTeX)
 
-**Familiar:** Google Cloud Platform, Microsoft Azure, Big Data Analytics, Hadoop/Hive/Zeppelin, Apache Spark, Azure Databricks, PySpark, Python/Flask web applications, C/C++
+**Familiar:** DevOps, Jenkins CI/CD pipelines, Kubernetes, Python/Flask web applications, C/C++
 
 ## Jarvis Projects
 
@@ -37,7 +37,7 @@ The database host setup has been automated with shell scripts, and a .sql file h
 
 **Spark** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/spark)]: This project used Microsoft Azure Databricks to perform big data analytics workflows on retail transaction data that involved ingesting source data into a distributed file system; provisioning VM clusters; and running an Apache Spark Application as a distributed execution engine on top of a notebook user interface where PySpark code was written to run queries that answered key business questions. The queries performed in this project were the same as those performed in the aforementioned Python Data Analytics project, except PySpark DataFrames were used to characterize the queries instead of Pandas DataFrames.
 
-**Cloud/DevOps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/cloud_devops)]: Not Started
+**Cloud/DevOps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/master/cloud_devops)]: In progress
 
 
 ## Highlighted Projects

@@ -18,17 +18,17 @@
     ],
     "competent": [
       "JUnit/Mockito",
-      "RESTful APIs",
-      "Time Series Data Analysis",
+      "Google Cloud Platform",
+      "Microsoft Azure and Databricks",
+      "Hadoop/Hive/Zeppelin",
+      "Apache Spark",
       "Machine Learning/TensorFlow",
       "Overleaf (LaTeX)"
     ],
     "familiar": [
-      "Google Cloud Platform, Microsoft Azure",
-      "Big Data Analytics",
-      "Hadoop/Hive/Zeppelin",
-      "Apache Spark, Azure Databricks",
-      "PySpark",
+      "DevOps",
+      "Jenkins CI/CD pipelines",
+      "Kubernetes",
       "Python/Flask web applications",
       "C/C++"
     ]
@@ -71,7 +71,7 @@
     {
       "name": "Cloud/DevOps",
       "git_url": "/cloud_devops",
-      "description": ""
+      "description": "In progress"
     }
   ],
   "highlighted_projects": [
