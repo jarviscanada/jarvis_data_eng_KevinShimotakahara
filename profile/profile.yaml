@@ -27,16 +27,17 @@ skills:
   # At least 5 skills
   competent:
     - JUnit/Mockito
-    - RESTful APIs
-    - Time Series Data Analysis
+    - Google Cloud Platform
+    - Microsoft Azure and Databricks
+    - Hadoop/Hive/Zeppelin
+    - Apache Spark
     - Machine Learning/TensorFlow
     - Overleaf (LaTeX)
   # At least 5 skills
   familiar:
-    - Google Cloud Platform
-    - Big Data Analytics
-    - Hadoop/Hive/Zeppelin
-    - Microsoft Azure
+    - DevOps
+    - Jenkins CI/CD pipelines
+    - Kubernetes
     - Python/Flask web applications
     - C/C++
 
@@ -67,10 +68,10 @@ classifying them into 11 different categories based on their behaviour. Three im
     description: "This project used Google Cloud Platform to provision a Hadoop cluster to store a CSV file containing World Development Indicator data in a Hadoop Distributed File System. Hive queries were designed and executed on the distributed dataset with the help of both Beeline and Zeppelin user interfaces to extract insights into the state of the world we live in. Query speeds were optimized through the use of Hive partitions and Parquet file formatting."
   - name: "Spark"
     git_url: "/spark"
-    description: ""
+    description: "This project used Microsoft Azure Databricks to perform big data analytics workflows on retail transaction data that involved ingesting source data into a distributed file system; provisioning VM clusters; and running an Apache Spark Application as a distributed execution engine on top of a notebook user interface where PySpark code was written to run queries that answered key business questions. The queries performed in this project were the same as those performed in the aforementioned Python Data Analytics project, except PySpark DataFrames were used to characterize the queries instead of Pandas DataFrames."
   - name: "Cloud/DevOps"
     git_url: "/cloud_devops"
-    description: ""
+    description: "In progress"
 
 # List of personal or academic projects
 # Feel free to add more projects
