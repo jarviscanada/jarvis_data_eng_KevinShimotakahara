@@ -44,7 +44,7 @@ because the values are alphanumeric despite its name implying it is just a numbe
 The majority of the work performed in this project was writing DataFrame queries in PySpark to answer business questions related to the company's
 revenue stream, purchase statistics, and customer behaviour. However, some setup was required to injest the .sql data stored in our PostgreSQL data
 warehouse into our data cluster, and start using Azure Databricks for our Spark code development environment and underlying information system. The
-main steps to our methodology has been listed below:
+main steps to our methodology are listed below:
 
 1. Extract the retail data file from PostgreSQL in CSV format
 2. Subscribe to Microsoft Azure and gain access to an Azure Databricks workspace
