@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - image: kshimotakahara/trading-psql
-          name: psql
+          name: trading-psql
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
