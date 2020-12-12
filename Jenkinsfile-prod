@@ -10,7 +10,7 @@ pipeline {
         AZ_TENANT=credentials('AZ_TENANT')
 
         //Build
-        ACR_NAME='acrJarvisKevinShimotakahara2'
+        ACR_NAME='acrJarvisKevinShimotakaharaprod'
         //${BUILD_NUMBER} is a Jenkins built-in env https://bit.ly/32mySlQ
         //Note: double quote is neccessary here
         IMAGE_NAME_PSQL="trading-psql:${BUILD_NUMBER}"
@@ -19,7 +19,7 @@ pipeline {
         //Deploy
         RESOURCE_GROUP='rg-trading-app-aks-prod'
         CLUSTER_NAME='aks-trading-app-prod'
-        DOCKER_REPO='acrjarviskevinshimotakahara2.azurecr.io'
+        DOCKER_REPO='acrjarviskevinshimotakaharaprod.azurecr.io'
         DEPLOYMENT_NAME_PSQL='deployment.apps/trading-psql'
         DEPLOYMENT_NAME_APP='deployment.apps/trading'
     }
