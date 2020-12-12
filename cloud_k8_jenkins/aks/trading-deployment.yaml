@@ -34,7 +34,7 @@ spec:
         tier: app-server
     spec:
       containers:
-        - image: acrjarviskevinshimotakahara.azurecr.io/trading-app:latest
+        - image: acrjarviskevinshimotakahara2.azurecr.io/trading-app:latest
           name: trading
           env:
             - name: PSQL_URL
