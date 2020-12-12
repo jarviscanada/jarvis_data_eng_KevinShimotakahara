@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    environment {
+        app_name = 'trading-app'
+
+        //Init
+        AZ_USER=credentials('AZ_USER')
+        AZ_PWD=credentials('AZ_PWD')
+        AZ_TENANT=credentials('AZ_TENANT')
+
+        //Build
+        ACR_NAME='acrJarvisKevinShimotakaharaprod'
+        //${BUILD_NUMBER} is a Jenkins built-in env https://bit.ly/32mySlQ
+        //Note: double quote is neccessary here
+        IMAGE_NAME_PSQL="trading-psql:${BUILD_NUMBER}"
+        IMAGE_NAME_APP="trading-app:${BUILD_NUMBER}"
+
+        //Deploy
+        RESOURCE_GROUP='rg-trading-app-aks-prod'
+        CLUSTER_NAME='aks-trading-app-prod'
+        DOCKER_REPO='acrjarviskevinshimotakaharaprod.azurecr.io'
+        DEPLOYMENT_NAME_PSQL='deployment.apps/trading-psql'
+        DEPLOYMENT_NAME_APP='deployment.apps/trading'
+    }
+
+    stages {
+        stage('Init') {
+            steps {
+                sh 'az login --service-principal --username ${AZ_USER} --password ${AZ_PWD} --tenant ${AZ_TENANT}'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh ' az acr build --image ${IMAGE_NAME_APP} --registry $ACR_NAME --file Dockerfile-app .'
+                sh ' az acr build --image ${IMAGE_NAME_PSQL} --registry $ACR_NAME --file Dockerfile-psql .'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                //Connect to AKS
+                sh 'az aks get-credentials --name $CLUSTER_NAME --resource-group $RESOURCE_GROUP'
+                //show cluster info for debugging purposes
+                sh 'kubectl cluster-info'
+                //Deploy the new images
+                sh 'kubectl set image ${DEPLOYMENT_NAME_PSQL} trading-psql=${DOCKER_REPO}/${IMAGE_NAME_PSQL}'
+                sh 'kubectl set image ${DEPLOYMENT_NAME_APP} trading=${DOCKER_REPO}/${IMAGE_NAME_APP}'
+                //Check result
+                sh 'kubectl get all'
+            }
+        }
+    }
+}
