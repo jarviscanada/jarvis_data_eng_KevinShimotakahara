@@ -32,8 +32,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh ' az acr build --image ${IMAGE_NAME_APP} --registry $ACR_NAME --file Dockerfile ./springboot/'
-                sh ' az acr build --image ${IMAGE_NAME_PSQL} --registry $ACR_NAME --file Dockerfile ./springboot/psql/'
+                sh ' az acr build --image ${IMAGE_NAME_APP} --registry $ACR_NAME --file Dockerfile-app .'
+                sh ' az acr build --image ${IMAGE_NAME_PSQL} --registry $ACR_NAME --file Dockerfile-psql .'
             }
         }
         stage('Deploy') {
