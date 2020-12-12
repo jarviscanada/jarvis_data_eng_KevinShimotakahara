@@ -17,8 +17,8 @@ pipeline {
         IMAGE_NAME_APP="trading-app:${BUILD_NUMBER}"
 
         //Deploy
-        RESOURCE_GROUP='rg-trading-app-aks'
-        CLUSTER_NAME='aks-trading-app'
+        RESOURCE_GROUP='rg-trading-app-aks-prod'
+        CLUSTER_NAME='aks-trading-app-prod'
         DOCKER_REPO='acrjarviskevinshimotakahara2.azurecr.io'
         DEPLOYMENT_NAME_PSQL='deployment.apps/trading-psql'
         DEPLOYMENT_NAME_APP='deployment.apps/trading'
