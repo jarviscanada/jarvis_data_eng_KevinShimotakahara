@@ -4,7 +4,7 @@ This project deploys a [microservice-based stock trading application](https://gi
 This is a proof-of-concept project aimed at validating the plan to running Jarvis' on-premise servers on the Microsorft Azure cloud. 
 
 # Application Architecture
-Describing this project's architecture requires describing the architecture of Kubernetes. Kubernetes is a "container orchestrator", which means it organizes the dispatch of Docker containers containing the applications/microservices we want to run on a distributed system of machines. Kubernetes software runs on all cluster nodes, and operates in a master-worker architecture. Ultimately, Kubernetes allows us to pass high level commands to its API via the `kubectl` command 
+Describing this project's architecture requires describing the architecture of Kubernetes. Kubernetes is a "container orchestrator", which means it organizes the dispatch of containers containing our applications/microservices to a distributed system of machines. Kubernetes software runs on all cluster nodes, and operates in a master-worker architecture. Ultimately, Kubernetes allows us to pass high level commands to its API via the `kubectl` command 
 
 - Draw a diagram to show your k8s deployment
 
