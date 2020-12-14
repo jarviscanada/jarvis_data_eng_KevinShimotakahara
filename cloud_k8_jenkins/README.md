@@ -39,9 +39,16 @@ For our project, we use a cloud-based implementation of a Kubernetes cluster, na
 The two different microservices that constitute our trading application are the "trading app" and a PostgreSQL database that stores user account information and stock quote data. The "trading app" is a Java-powered web server with a Swagger user interface that users can use to interact with the services our application provides. Both of these microservices have been packaged into Docker images, and pushed to our ACR so they can be accessed by and deployed into our AKS cluster. For the trading app Deployment, we set up a Horizontal Pod Autoscaler Controller, which monitors the CPU usage of its pods, and increases/decreases the number of replicas in the deployment to maintain an optimal level of utilization for each pod. Our trading app replicas are accessible via a public IP address advertized by a Load Balancer Service entity, which allows users to access our web application. The Load Balancer Service forwards any incoming traffic to the pods hosting the server, selecting which pod to forward each request to in a manner that all pods get a similar workload. Finally, a Cluster IP Service was implemented for the PostgreSQL database Deployment so our trading app pods can communicate with it.
 
 # Jenkins CI/CD pipeline
-Moreover, a Jenkins helm chart was deployed on a separate Minikube Kubernetes cluster, allowing us to use Jenkins to automate the integration and deployment of our codebase to the AKS cluster when updates to it are made. Using Jenkins in this manner is commonly referred to as building a Continuous Integration, Continuous Deployment (CI/CD) pipeline.
-- Describe your CI/CD pipeline (e.g. git clone, build, test, deploy)
-- Describe your Jenkins CI/CD pipeline
+A Jenkins helm chart was deployed on a separate Minikube Kubernetes cluster, allowing us to use Jenkins pipelines to automate the integration and deployment of our codebase to the AKS cluster when updates to it are made. Using Jenkins in this manner is commonly referred to as building a Continuous Integration, Continuous Deployment (CI/CD) pipeline. The general workflow our CI/CD pipeline involves pulling the trading application's codebase from this GitHub repository; running the Dockerfiles that build/test/package our application into docker images; pushing the images to our ACR; and telling our AKS Deployments to update their pods using the new images.
+
+Jenkins pipelines are characterized with Jenkinsfiles that contain sets of commands organized into stages, namely "Init", "Build", and "Deploy". The stages are executed sequentially, starting with Init, then Build, then Deploy.
+
+The Init stage contains all the commands needed to start testing/building/deploying the codebase into a deployable file/image. In our case, we just need to login to Azure, so we can access our ACR and the AKS cluster that is provisioning our application. We set up an Azure service principal so our Jenkins agent can securely access our Azure resources.
+
+The Build stage includes the commands needed to package the current codebase in our GitHub repository. The packaging process results in the generation of Docker images that can be accessed and deployed to our ACR programmatically during the Deploy stage. This is the stage that also does automated tests on the codebase to make sure there are no issues with the code prior to deployment. In our case, we use an Azure API to run Dockerfiles that build and containerize our microservice code, and push the images to our ACR.
+
+The Deploy stage takes the images and runs them in the environment we chose, namely our AKS cluster. Upon successful execution of the deploy commands, our application has been officially updated to reflect the changes in the codebase that triggered the CI/CD pipeline to engage.
+
 - Visualize your Ci/CD pipeline with a diagram
 
 # Improvements
