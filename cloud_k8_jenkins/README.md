@@ -4,6 +4,8 @@ This project deploys a [microservice-based stock trading application](https://gi
 This is a proof-of-concept project aimed at validating the plan to migrate Jarvis' on-premise servers to the Microsorft Azure cloud. 
 
 # Application Architecture
+
+## Kubernetes Architecture (Skip This if You Already Know)
 Describing this project's architecture first requires a general architectural description of Kubernetes. Kubernetes is a "container orchestrator", which means it organizes the dispatch of containerized applications/microservices to a distributed system of machines. Kubernetes operates in a master-worker architecture:
 
 ![my image](./assets/K8S-Arch.png)
@@ -26,6 +28,11 @@ The applications/microservices managed by the master are run on the worker nodes
  - **Pods:** Pods are groups of containers that share storage, Linux name space, IP addresses, etc. A pod represents one running process in the cluster, and is the smallest unit of stuff that can be interacted with in the cluster.
  - **Kube Proxy:** Essentially, a worker node's kube proxy deals with communication between pods and external entities like internet users.
 
+### On Deployments and Services
+Deployment Controllers and Services are used in Kubernetes to manage "pod sets" and the communication between two "pod sets" (as well as between a pod set and some external entity) respectively. A "pod set" in this case refers to a group of identical pods (i.e. a pod running a particular process and all its replicas). Deployment Controllers are used to execute replication, update, rollback, and scaling actions on pod sets. A Service advertises an IP address that can be used to contact a particular pod set. It works by having this IP address being associated with the service, and then the service maintains the list of IP addresses that the current (ephemeral) pods have, then performs some logic (say a load balancing routine) to decide how to forward traffic as it comes in.
+
+## Cloud-Based Project Architecture
+For our project, we use a-cloud based implementation of a Kubernetes cluster, namely Microsoft Azure Kubernetes Service (AKS) to run our project's microservices. As shown in the diagram below, we set up an Azure resource group containing an AKS cluster in addition to an Azure Container Registry (ACR) used to store container images used to deploy pods in our AKS.
 
 ![my image](./assets/AKS-Arch.png)
 
