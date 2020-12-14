@@ -41,17 +41,19 @@ The two different microservices that constitute our trading application are the 
 # Jenkins CI/CD pipeline
 A Jenkins helm chart was deployed on a separate Minikube Kubernetes cluster, allowing us to use Jenkins pipelines to automate the integration and deployment of our codebase to the AKS cluster when updates to it are made. Using Jenkins in this manner is commonly referred to as building a Continuous Integration, Continuous Deployment (CI/CD) pipeline. The general workflow our CI/CD pipeline involves pulling the trading application's codebase from this GitHub repository; running the Dockerfiles that build/test/package our application into docker images; pushing the images to our ACR; and telling our AKS Deployments to update their pods using the new images.
 
-Jenkins pipelines are characterized with Jenkinsfiles that contain sets of commands organized into stages, namely "Init", "Build", and "Deploy". The stages are executed sequentially, starting with Init, then Build, then Deploy.
+Jenkins pipelines are characterized with [Jenkinsfiles](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/blob/develop/Jenkinsfile-prod) that contain sets of commands organized into stages, namely "Init", "Build", and "Deploy". The stages are executed sequentially, starting with Init, then Build, then Deploy.
 
 The Init stage contains all the commands needed to start testing/building/deploying the codebase into a deployable file/image. In our case, we just need to login to Azure, so we can access our ACR and the AKS cluster that is provisioning our application. We set up an Azure service principal so our Jenkins agent can securely access our Azure resources.
 
-The Build stage includes the commands needed to package the current codebase in our GitHub repository. The packaging process results in the generation of Docker images that can be accessed and deployed to our ACR programmatically during the Deploy stage. This is the stage that also does automated tests on the codebase to make sure there are no issues with the code prior to deployment. In our case, we use an Azure API to run Dockerfiles that build and containerize our microservice code, and push the images to our ACR.
+The Build stage includes the commands needed to package the current codebase in our GitHub repository. The packaging process results in the generation of Docker images that can be accessed and deployed to our ACR programmatically during the Deploy stage. This is the stage that also does automated tests on the codebase to make sure there are no issues with the code prior to deployment. In our case, we use an Azure API to run [Dockerfiles](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/blob/develop/Dockerfile-app) that build and containerize our microservice code, and push the images to our ACR.
 
-The Deploy stage takes the images and runs them in the environment we chose, namely our AKS cluster. Upon successful execution of the deploy commands, our application has been officially updated to reflect the changes in the codebase that triggered the CI/CD pipeline to engage.
+The Deploy stage takes the images and runs them in the environment we chose, namely our AKS cluster. Upon successful execution of the deploy commands, our application is officially updated to reflect the changes in the codebase that triggered the CI/CD pipeline to engage.
 
-- Visualize your Ci/CD pipeline with a diagram
+The diagram below visualizes the process described above:
+![my image](./assets/Jenkins.png)
 
-# Improvements
+# Improvements and Future Work
+This project only scratched the surface of Kubernetes, Cloud Services, and CI/CD pipelines. Below is a list of things that can be done to improve and/or expand upon this project:
 1. Implement an automated deployment rollback mechanism (e.g. [blue/green](https://martinfowler.com/bliki/BlueGreenDeployment.html))
 2. Design a deployment scheduler in Jenkins to make the CI/CD pipeline provision true Continuous Deployment
-3. Some third thing
+3. Compare this workflow with an equivalent ones built with different Cloud services, e.g. Amazon Web Services or Google Cloud Platform
