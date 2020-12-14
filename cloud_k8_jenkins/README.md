@@ -32,10 +32,11 @@ The applications/microservices managed by the master are run on the worker nodes
 Deployment Controllers and Services are used in Kubernetes to manage "pod sets" and the communication between two "pod sets" (as well as between a pod set and some external entity) respectively. A "pod set" in this case refers to a group of identical pods (i.e. a pod running a particular process and all its replicas). Deployment Controllers are used to execute replication, update, rollback, and scaling actions on pod sets. A Service advertises an IP address that can be used to contact a particular pod set. It works by having this IP address being associated with the service, and then the service maintains the list of IP addresses that the current (ephemeral) pods have, then performs some logic (say a load balancing routine) to decide how to forward traffic as it comes in.
 
 ## Cloud-Based Project Architecture
-For our project, we use a-cloud based implementation of a Kubernetes cluster, namely Microsoft Azure Kubernetes Service (AKS) to run our project's microservices. As shown in the diagram below, we set up an Azure resource group containing an AKS cluster in addition to an Azure Container Registry (ACR) used to store container images used to deploy pods in our AKS.
+For our project, we use a cloud-based implementation of a Kubernetes cluster, namely Microsoft Azure Kubernetes Service (AKS) to run our project's microservices. As shown in the diagram below, we set up an Azure resource group containing an AKS cluster in addition to an Azure Container Registry (ACR) used to store container images used to deploy pods in our AKS:
 
 ![my image](./assets/AKS-Arch.png)
 
+The two different microservices that constitute our trading application are the "trading app" and a PostgreSQL database that stores user account information and stock quote data. The "trading app" is a Java-powered web server with a Swagger user interface that users can use to interact with the services our application provides. Both of these microservices have been packaged into Docker images, and pushed to our ACR so they can be accessed by and deployed into our AKS cluster. For the trading app Deployment, we set up a Horizontal Pod Autoscaler Controller, which monitors the CPU usage of its pods, and increases/decreases the number of replicas in the deployment to maintain an optimal level of utilization for each pod. Our trading app replicas are accessible via a public IP address advertized by a Load Balancer Service entity, which allows users to access our web application. The Load Balancer Service forwards any incoming traffic to the pods hosting the server, selecting which pod to forward each request to in a manner that all pods get a similar workload. Finally, a Cluster IP Service was implemented for the PostgreSQL database Deployment so our trading app pods can communicate with it.
 
 # Jenkins CI/CD pipeline
 Moreover, a Jenkins helm chart was deployed on a separate Minikube Kubernetes cluster, allowing us to use Jenkins to automate the integration and deployment of our codebase to the AKS cluster when updates to it are made. Using Jenkins in this manner is commonly referred to as building a Continuous Integration, Continuous Deployment (CI/CD) pipeline.
@@ -46,4 +47,4 @@ Moreover, a Jenkins helm chart was deployed on a separate Minikube Kubernetes cl
 # Improvements
 1. Implement an automated deployment rollback mechanism (e.g. [blue/green](https://martinfowler.com/bliki/BlueGreenDeployment.html))
 2. Design a deployment scheduler in Jenkins to make the CI/CD pipeline provision true Continuous Deployment
-3.
+3. Some third thing
