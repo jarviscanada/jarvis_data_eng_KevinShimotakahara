@@ -32,8 +32,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh ' az acr build --image ${IMAGE_NAME_APP} --registry $ACR_NAME --file Dockerfile-app .'
-                sh ' az acr build --image ${IMAGE_NAME_PSQL} --registry $ACR_NAME --file Dockerfile-psql .'
+                sh ' az acr build --image ${IMAGE_NAME_APP} --registry $ACR_NAME --file Dockerfile .'
+                dir("psql") {
+                    sh ' az acr build --image ${IMAGE_NAME_PSQL} --registry $ACR_NAME --file Dockerfile .'
+                }
             }
         }
         stage('Deploy') {
