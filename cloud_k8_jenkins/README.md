@@ -1,15 +1,20 @@
 # Introduction
-This project deploys a [microservice-based stock trading application](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/develop/springboot) in two different Kubernetes clusters provisioned by Microsoft Azure Kubernetes Service (AKS) that are maintained with Jenkins Continuous Integration/Continuous Development (CI/CD) pipelines. These clusters provide two distinct "development/dev" and "production/prod" environments to practice DevOps paradigms. With the help of Kubernetes, this project is capable of delivering a sophisticated deployment environment that enables our application to be self-healing during continencies; adaptive to fluctuations in user demand by ensuring that an appropriate number of replicas are running; and capable of evenly distributing workloads across application replicas.
+This project deploys a [microservice-based stock trading application](https://github.com/jarviscanada/jarvis_data_eng_KevinShimotakahara/tree/develop/springboot) in two different Kubernetes clusters provisioned by Microsoft Azure Kubernetes Service (AKS) that are maintained with Jenkins Continuous Integration/Continuous Development (CI/CD) pipelines. These clusters provide two distinct "development (dev)" and "production (prod)" environments to practice DevOps paradigms. With the help of Kubernetes, this project is capable of delivering a sophisticated deployment environment that enables our application to be self-healing during contingencies; adaptive to fluctuations in user demand by ensuring that an appropriate number of replicas are running; and capable of evenly distributing workloads across application replicas.
 
-This is a proof-of-concept project aimed at validating the plan to running Jarvis' on-premise servers on the Microsorft Azure cloud. 
+This is a proof-of-concept project aimed at validating the plan to migrate Jarvis' on-premise servers to the Microsorft Azure cloud. 
 
 # Application Architecture
-Describing this project's architecture requires describing the architecture of Kubernetes. Kubernetes is a "container orchestrator", which means it organizes the dispatch of containers containing our applications/microservices to a distributed system of machines. Kubernetes software runs on all cluster nodes, and operates in a master-worker architecture. Ultimately, Kubernetes allows us to pass high level commands to its API via the `kubectl` command 
+Describing this project's architecture requires describing the architecture of Kubernetes. Kubernetes is a "container orchestrator", which means it organizes the dispatch of containerized applications/microservices to a distributed system of machines. Kubernetes software runs on all cluster nodes, and operates in a master-worker architecture:
 
-- Draw a diagram to show your k8s deployment
+![my image](./assets/K8S-Arch.png)
+
+Ultimately, Kubernetes allows us to pass high level commands to its API via the `kubectl` command 
+"The Master is responsible for managing the cluster. The master coordinates all activities in your cluster, such as scheduling applications, maintaining applications' desired state, scaling applications, and rolling out new updates."
+
+"A node is a VM or a physical computer that serves as a worker machine in a Kubernetes cluster. Each node has a Kubelet, which is an agent for managing the node and communicating with the Kubernetes master. The node should also have tools for handling container operations, such as containerd or Docker. A Kubernetes cluster that handles production traffic should have a minimum of three nodes."
 
 - Describe the application architecture (e.g. load balancer, auto-scaling, application server, psql, etc.)
-- Draw an application architecture (e.g. load balancer, auto-scaling, application server, psql, etc.)
+![my image](./assets/AKS-Arch.png)
 
 
 # Jenkins CI/CD pipeline
