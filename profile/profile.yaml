@@ -71,7 +71,9 @@ classifying them into 11 different categories based on their behaviour. Three im
     description: "This project used Microsoft Azure Databricks to perform big data analytics workflows on retail transaction data that involved ingesting source data into a distributed file system; provisioning VM clusters; and running an Apache Spark Application as a distributed execution engine on top of a notebook user interface where PySpark code was written to run queries that answered key business questions. The queries performed in this project were the same as those performed in the aforementioned Python Data Analytics project, except PySpark DataFrames were used to characterize the queries instead of Pandas DataFrames."
   - name: "Cloud/DevOps"
     git_url: "/cloud_devops"
-    description: "In progress"
+    description: "This project used Microsoft Azure Kubernetes Service (AKS) in conjunction with Jenkins pipelines to deploy the aforementioned SpringBoot Microservice Stock Trading App on the cloud, and have it maintained with Continuous Integration/Continuous Development (CI/CD) pipelines.
+    Jenkins was provisioned on a Minikube cluster locally, where it could automatically clone the git repository containing the application's codebase; build, test, and containerize the application by running Dockerfiles; push Docker images containing instances of our application's microservices to an Azure Container Repository (ACR); and use kubectl commands to update pod deployments in our AKS cluster with ACR images.
+    Both development (dev) and production (prod) environments were created with their own AKS clusters and CI/CD pipelines to practice DevOps paradigms."
 
 # List of personal or academic projects
 # Feel free to add more projects
