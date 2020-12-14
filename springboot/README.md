@@ -1,4 +1,4 @@
-Table of contents
+# Table of contents
 * [Introduction](#Introduction)
 * [Quick Start](#quick-start)
 * [Architecture](#Architecture)
@@ -90,7 +90,7 @@ docker build -t trading-psql .
 docker image ls -f reference=trading-psql
 ```
 
-To run `trading-app`, execute the following commands:
+To run `trading-psql`, execute the following commands:
 
 ```
 docker run --name trading-psql-dev \
